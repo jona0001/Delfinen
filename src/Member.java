@@ -1,5 +1,5 @@
 public class Member {
-    String name;
-    int age;
+    private String name;
+    private int age;
 
 }
