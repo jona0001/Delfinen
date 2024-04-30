@@ -3,19 +3,19 @@ package domain_model;
 public class Swimmer {
     private int age;
     private String name;
-    private String swimming_discipline;
-    private String competition_category;
-    private String training_results;
+    private Discipline swimmingDiscipline;
+    private boolean isCompeting;
+    private Result trainingResults;
 
 
 
-    public Swimmer(int age, double date, String name, String swimming_discipline,
-                   String competition_category, String training_results, String competition_results) {
+    public Swimmer(int age, double date, String name, Discipline swimmingDiscipline,
+                   boolean isCompeting, Result trainingResults) {
         this.age = age;
         this.name = name;
-        this.swimming_discipline = swimming_discipline;
-        this.competition_category = competition_category;
-        this.training_results = training_results;
+        this.swimmingDiscipline = swimmingDiscipline;
+        this.isCompeting = isCompeting;
+        this.trainingResults = trainingResults;
     }
 
     public int getAge() {
@@ -34,28 +34,28 @@ public class Swimmer {
         this.name = name;
     }
 
-    public String getSwimming_discipline() {
-        return swimming_discipline;
+    public Discipline getSwimmingDiscipline() {
+        return swimmingDiscipline;
     }
 
-    public void setSwimming_discipline(String swimming_discipline) {
-        this.swimming_discipline = swimming_discipline;
+    public void setSwimmingDiscipline(Discipline swimmingDiscipline) {
+        this.swimmingDiscipline = swimmingDiscipline;
     }
 
-    public String getCompetition_category() {
-        return competition_category;
+    public boolean isCompeting() {
+        return isCompeting;
     }
 
-    public void setCompetition_category(String competition_category) {
-        this.competition_category = competition_category;
+    public void setCompeting(boolean competing) {
+        this.isCompeting = competing;
     }
 
-    public String getTraining_results() {
-        return training_results;
+    public Result getTrainingResults() {
+        return trainingResults;
     }
 
-    public void setTraining_results(String training_results) {
-        this.training_results = training_results;
+    public void setTrainingResults(Result trainingResults) {
+        this.trainingResults = trainingResults;
     }
 
 
