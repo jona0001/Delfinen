@@ -1,3 +1,5 @@
+package domain_model;
+
 public class Membership {
     private int id;
     private int price;

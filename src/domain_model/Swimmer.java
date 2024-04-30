@@ -1,3 +1,5 @@
+package domain_model;
+
 public class Swimmer {
     private int age;
     private String name;
