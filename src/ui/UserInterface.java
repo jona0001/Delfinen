@@ -56,8 +56,23 @@ public class UserInterface {
         System.out.println("Enter name:");
         String name = scanner.nextLine();
         System.out.println("Enter age:");
-        int age = scanner.nextInt();
+        boolean isDoneWithAge = false;
+        int age = 0;
+        while (!isDoneWithAge) {
+            try {
+                age = scanner.nextInt();
+                isDoneWithAge = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter age as a number:");
+                scanner.nextLine();
+            }
+        }
         scanner.nextLine();
+        String competing = scanner.nextLine();
+        boolean isCompeting = false;
+        if(competing.equalsIgnoreCase("yes")){
+            isCompeting = true;
+        }
 
     }
 

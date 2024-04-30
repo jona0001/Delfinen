@@ -1,21 +1,22 @@
 package domain_model;
 
+import java.util.ArrayList;
+
 public class Swimmer {
     private int age;
     private String name;
     private Discipline swimmingDiscipline;
     private boolean isCompeting;
-    private Result trainingResults;
+    private ArrayList<Result> trainingResults;
 
 
 
-    public Swimmer(int age, double date, String name, Discipline swimmingDiscipline,
-                   boolean isCompeting, Result trainingResults) {
+    public Swimmer(int age, String name, boolean isCompeting, Discipline swimmingDiscipline) {
         this.age = age;
         this.name = name;
         this.swimmingDiscipline = swimmingDiscipline;
         this.isCompeting = isCompeting;
-        this.trainingResults = trainingResults;
+        this.trainingResults = new ArrayList<>();
     }
 
     public int getAge() {
@@ -50,13 +51,13 @@ public class Swimmer {
         this.isCompeting = competing;
     }
 
-    public Result getTrainingResults() {
+
+    public void addTrainingResult(Result trainingResult) {
+        trainingResults.add(trainingResult);
+    }
+
+    public ArrayList<Result> getTrainingResults(){
         return trainingResults;
     }
-
-    public void setTrainingResults(Result trainingResults) {
-        this.trainingResults = trainingResults;
-    }
-
 
 }
