@@ -79,6 +79,21 @@ public class UserInterface {
         System.out.println("Enter desired membership type ");
         String membershipType = scanner.nextLine();
 
+        System.out.println("Enter members descipline");
+        String memberDescipline = scanner.next();
+        boolean member = false;
+        do {
+            for (Discipline discipline : Discipline.values()) {
+                if (discipline.equals(d)) {
+                    System.out.println("JA");
+                }
+            }
+        }
+        while (memberDescipline.isEmpty()); {
+            System.out.println("empty");
+        }
+
+
 
     }
 
