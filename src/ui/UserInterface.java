@@ -2,7 +2,9 @@ package ui;
 import domain_model.*;
 import data_source.*;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -52,9 +54,9 @@ public class UserInterface {
 
     }
 
-    public void addNewMember(){
+    public void addNewMember() {
         System.out.println("Enter name:");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.println("Enter age:");
         boolean isDoneWithAge = false;
         int age = 0;
@@ -67,14 +69,19 @@ public class UserInterface {
                 scanner.nextLine();
             }
         }
-        scanner.nextLine();
         String competing = scanner.nextLine();
         boolean isCompeting = false;
-        if(competing.equalsIgnoreCase("yes")){
+        if (competing.equalsIgnoreCase("yes")) {
             isCompeting = true;
         }
 
+        // We could add this function in the step where we ask about member age and do a if<18, set to Junior etc..
+        System.out.println("Enter desired membership type ");
+        String membershipType = scanner.nextLine();
+
+
     }
+
 
 
 }
