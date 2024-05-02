@@ -1,6 +1,6 @@
 package domain_model;
 
-public class Competetion {
+public class Competition {
     private String venue;
     private int ranking;
     private int date;
