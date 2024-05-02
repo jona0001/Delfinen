@@ -79,6 +79,16 @@ public class UserInterface {
         System.out.println("Enter desired membership type ");
         String membershipType = scanner.nextLine();
 
+        System.out.println("Enter descipline");
+        String discipline = scanner.next();
+        Discipline discipline1 = null;
+        switch (discipline.toLowerCase()){
+            case "crawl" -> discipline1 = Discipline.CRAWL;
+            case
+        }
+
+    }
+    public void isCompeting(){
 
     }
 
