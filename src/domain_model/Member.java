@@ -8,7 +8,7 @@ public class Member {
     private String name;
     private Membership membership;
 
-    public Member(int age, String name) {
+    public Member(String name, int age) {
         this.age = age;
         this.name = name;
     }

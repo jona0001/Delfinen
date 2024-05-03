@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 public class Delfin {
 
-    private ArrayList<Member> members = new ArrayList<>();
+    private ArrayList<Member> members;
     private ArrayList<Team> teams = new ArrayList<>();
     private FileHandler fileHandler = new FileHandler();
+
+    public Delfin(ArrayList<Member> members) {
+        this.members = members;
+    }
 
     //TODO:add price depending on a membership
     public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
@@ -36,12 +40,16 @@ public class Delfin {
         if(membership.equalsIgnoreCase("active")){
             newMember = new CompetingMember(age, name, discipline1);
         } else{
-            newMember = new Member(age, name);
+            newMember = new Member(name, age);
         }
         newMember.setMembership(newMembership);
         boolean isAdded = members.add(newMember);
         fileHandler.saveOneMember(newMember);
         return isAdded;
+    }
+
+    public ArrayList<Member> getAllMembers(){
+        return members;
     }
 
 

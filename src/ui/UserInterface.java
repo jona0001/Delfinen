@@ -21,7 +21,7 @@ public class UserInterface {
     }
 
     public void start() throws FileNotFoundException {
-        //loadMovieFromFile();
+        loadMembersFromFile();
         int sentinel = 9;
         while (menuChoice != sentinel) {
             myMenuText();
@@ -34,6 +34,10 @@ public class UserInterface {
 //                case 6 -> sortMovies();
             }
         }
+    }
+
+    private void loadMembersFromFile() {
+        controller.loadMembersFromFile();
     }
 
     public void myMenuText() {
