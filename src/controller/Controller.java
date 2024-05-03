@@ -5,6 +5,8 @@ import domain_model.Delfin;
 import domain_model.Member;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Controller {
     private Delfin delfin;
@@ -18,7 +20,8 @@ public class Controller {
         return delfin.addMember(name, age, membership, discipline);
     }
 
-    public void loadMembersFromFile() {
-        fileHandler.loadMembers();
+
+    public ArrayList<Member> getAllMembers() {
+        return delfin.getAllMembers();
     }
 }

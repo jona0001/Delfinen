@@ -5,10 +5,7 @@ import data_source.*;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserInterface {
     private Scanner scanner;
@@ -21,13 +18,12 @@ public class UserInterface {
     }
 
     public void start() throws FileNotFoundException {
-        loadMembersFromFile();
         int sentinel = 9;
         while (menuChoice != sentinel) {
             myMenuText();
             switch (menuChoice) {
                 case 1 -> addNewMember();
-//                case 2 -> printMovieCollection();
+                case 2 -> printMembers();
 //                case 3 -> searchInMovieCollections();
 //                case 4 -> editMovie();
 //                case 5 -> deleteMovie();
@@ -36,14 +32,20 @@ public class UserInterface {
         }
     }
 
-    private void loadMembersFromFile() {
-        controller.loadMembersFromFile();
+    private void printMembers() {
+        System.out.println("All members:");
+        for (int i = 0; i < controller.getAllMembers().size(); i++) {
+            System.out.printf("%d. ", i);
+            System.out.println();
+            System.out.println(controller.getAllMembers().get(i));
+        }
     }
+
 
     public void myMenuText() {
         System.out.println("***** Menu *****");
         System.out.println("1. Add new member");
-        System.out.println("2: Add new training result");
+        System.out.println("2: See the list of members");
         System.out.println("3: See who did not pay");
         System.out.println("4: Show all members");
         System.out.println("5: Show upcoming revenue");

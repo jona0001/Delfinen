@@ -56,12 +56,26 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "" +
-                "" + id +
-                "," + price +
-                "," + isPaid +
-                "," + registrationDate +
-                "," + cancellationDate +
-                "," + membershipType;
+        return "Membership{" +
+                "id=" + id +
+                ", price=" + price +
+                ", isPaid=" + isPaid +
+                ", registrationDate=" + registrationDate +
+                ", cancellationDate=" + cancellationDate +
+                ", membershipType=" + membershipType +
+                '}';
+    }
+
+    public String toCSV() {
+        // Format the movie attributes into CSV format
+        StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append(id).append(",");
+        csvBuilder.append(price).append(",");
+        csvBuilder.append(isPaid).append(",");
+        csvBuilder.append(registrationDate).append(",");
+        csvBuilder.append(cancellationDate).append(",");
+        csvBuilder.append(membershipType);
+        // Remove the trailing comma and return the CSV string
+        return csvBuilder.toString();
     }
 }

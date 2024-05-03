@@ -7,7 +7,7 @@ public class CompetingMember extends Member {
     private ArrayList<Result> trainingResults;
 
     public CompetingMember(int age, String name, Discipline swimmingDiscipline) {
-        super(age, name);
+        super(name, age);
         this.swimmingDiscipline = swimmingDiscipline;
         trainingResults = new ArrayList<>();
     }

@@ -37,11 +37,18 @@ public class Member {
         StringBuilder csvBuilder = new StringBuilder();
         csvBuilder.append(name).append(",");
         csvBuilder.append(age).append(",");
-        csvBuilder.append(membership).append(",");
+        csvBuilder.append(membership.toCSV()).append(",");
 
         // Remove the trailing comma and return the CSV string
         return csvBuilder.toString();
     }
 
-
+    @Override
+    public String toString() {
+        return "Member{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                ", membership=" + membership +
+                '}';
+    }
 }
