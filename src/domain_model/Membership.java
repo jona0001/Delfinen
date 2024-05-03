@@ -31,7 +31,7 @@ public class Membership {
     }
 
     public int getId() {
-        return id;
+        return id++;
     }
 
     public int getPrice() {
@@ -56,13 +56,12 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership" +
-                "id=" + id +
-                ", price=" + price +
-                ", isPaid=" + isPaid +
-                ", registrationDate=" + registrationDate +
-                ", cancellationDate=" + cancellationDate +
-                ", membershipType=" + membershipType
-                ;
+        return "" +
+                "" + id +
+                "," + price +
+                "," + isPaid +
+                "," + registrationDate +
+                "," + cancellationDate +
+                "," + membershipType;
     }
 }
