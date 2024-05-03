@@ -2,6 +2,7 @@ package domain_model;
 
 
 import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
 
 public class Member {
     private int age;
@@ -45,10 +46,14 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
-                "age=" + age +
-                ", name='" + name + '\'' +
-                ", membership=" + membership +
-                '}';
+        return "Member information:" +
+                "\n Name = " + name +
+                "\n Age = " + age +
+                "\n Membership ID = " + membership.getMembershipType() +
+                "\n Price = " + membership.getPrice() + "kr" +
+                "\n isPiad = " + membership.isPaid() +
+                "\n Registration Date = " + membership.getRegistrationDate().toLocalDate() +
+                "\n Cancellation Date = " + membership.getCancellationDate() +
+                "\n Membership Type = " + membership.getMembershipType();
     }
 }
