@@ -32,4 +32,16 @@ public class Member {
     public void setMembership(Membership membership) {
         this.membership = membership;
     }
+    public String toCSV() {
+        // Format the movie attributes into CSV format
+        StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append(name).append(",");
+        csvBuilder.append(age).append(",");
+        csvBuilder.append(membership).append(",");
+
+        // Remove the trailing comma and return the CSV string
+        return csvBuilder.toString();
+    }
+
+
 }
