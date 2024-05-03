@@ -17,7 +17,6 @@ public class UserInterface {
 
     public UserInterface() {
         scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
-        scanner.useDelimiter("\n");
         //controller = new Controller();
     }
 
@@ -56,22 +55,22 @@ public class UserInterface {
     }
 
     public void addNewMember() {
-        Scanner addScanner = new Scanner(System.in);
         System.out.println("Enter name:");
-        String name = addScanner.next();
+        String name = scanner.next();
+
         System.out.println("Enter age:");
         boolean isDoneWithAge = false;
         int age = 0;
         while (!isDoneWithAge) {
             try {
-                age = addScanner.nextInt();
+                age = scanner.nextInt();
                 isDoneWithAge = true;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter age as a number:");
-                addScanner.nextLine();
+                scanner.nextLine();
             }
         }
-        String competing = addScanner.next();
+        String competing = scanner.nextLine();
         boolean isCompeting = false;
         if (competing.equalsIgnoreCase("yes")) {
             isCompeting = true;
@@ -79,10 +78,33 @@ public class UserInterface {
 
         // We could add this function in the step where we ask about member age and do a if<18, set to Junior etc..
         System.out.println("Enter desired membership type ");
-        String membershipType = addScanner.next();
+        String membershipType = scanner.next();
 
+        Discipline discipline1 = null;
+        String discipline ="";
+
+        if (membershipType.equalsIgnoreCase("Active")){
+            System.out.println("Enter discipline");
+            Scanner scannerTwo = new Scanner(System.in);
+
+            switch (discipline.toLowerCase()){
+                case "crawl" -> discipline1 = Discipline.CRAWL;
+                case "back crawl", "backcrawl" -> discipline1 = Discipline.BACK_CRAWL;
+                case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
+                case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
+            }
+        }
+
+        boolean isAdded = controller.addMovie();
+
+
+
+
+    }
+    public void isCompeting(){
         System.out.println("Enter discipline");
-        String discipline = addScanner.next();
+        Scanner scannerTwo = new Scanner(System.in);
+        String discipline = scannerTwo.next();
         Discipline discipline1 = null;
         switch (discipline.toLowerCase()){
             case "crawl" -> discipline1 = Discipline.CRAWL;
@@ -90,16 +112,12 @@ public class UserInterface {
             case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
             case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
         }
+
+
 //        while((!discipline.equals("crawl"))
 //        && (!discipline.equals("back crawl"))
 //        && (!discipline.equals("butterfly"))
 //        && (!discipline.equals("breast stroke"))){
-//
-//        }
-
-
-    }
-    public void isCompeting(){
 
     }
 
