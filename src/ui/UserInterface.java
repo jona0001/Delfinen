@@ -18,7 +18,6 @@ public class UserInterface {
     public UserInterface() {
         scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
         //controller = new Controller();
-        scanner.useDelimiter("\n");
     }
 
     public void start() throws FileNotFoundException {
@@ -71,8 +70,7 @@ public class UserInterface {
                 scanner.nextLine();
             }
         }
-        scanner.nextLine();
-        String competing = scanner.next();
+        String competing = scanner.nextLine();
         boolean isCompeting = false;
         if (competing.equalsIgnoreCase("yes")) {
             isCompeting = true;
@@ -82,9 +80,24 @@ public class UserInterface {
         System.out.println("Enter desired membership type ");
         String membershipType = scanner.next();
 
+        Discipline discipline1 = null;
+        String discipline ="";
+
         if (membershipType.equalsIgnoreCase("Active")){
-            isCompeting();
+            System.out.println("Enter discipline");
+            Scanner scannerTwo = new Scanner(System.in);
+
+            switch (discipline.toLowerCase()){
+                case "crawl" -> discipline1 = Discipline.CRAWL;
+                case "back crawl", "backcrawl" -> discipline1 = Discipline.BACK_CRAWL;
+                case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
+                case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
+            }
         }
+
+        boolean isAdded = controller.addMovie();
+
+
 
 
     }
@@ -99,7 +112,7 @@ public class UserInterface {
             case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
             case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
         }
-        System.out.println("here is your membership!");
+
 
 //        while((!discipline.equals("crawl"))
 //        && (!discipline.equals("back crawl"))
