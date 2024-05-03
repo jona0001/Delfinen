@@ -53,4 +53,16 @@ public class Membership {
     public MembershipType getMembershipType() {
         return membershipType;
     }
+
+    @Override
+    public String toString() {
+        return "Membership" +
+                "id=" + id +
+                ", price=" + price +
+                ", isPaid=" + isPaid +
+                ", registrationDate=" + registrationDate +
+                ", cancellationDate=" + cancellationDate +
+                ", membershipType=" + membershipType
+                ;
+    }
 }
