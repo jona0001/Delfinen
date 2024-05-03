@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-public void saveOneMovie(Member member) throws FileNotFoundException {
-        PrintStream out = new PrintStream(new FileOutputStream(("movies.csv"), true));
+public void saveOneMember(Member member) throws FileNotFoundException {
+        PrintStream out = new PrintStream(new FileOutputStream(("members.csv"), true));
         out.println(member.toCSV());
     }
     /*

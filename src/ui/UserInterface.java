@@ -17,7 +17,7 @@ public class UserInterface {
 
     public UserInterface() {
         scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
-        //controller = new Controller();
+        controller = new Controller();
     }
 
     public void start() throws FileNotFoundException {
@@ -54,7 +54,7 @@ public class UserInterface {
 
     }
 
-    public void addNewMember() {
+    public void addNewMember() throws FileNotFoundException {
         System.out.println("Enter name:");
         String name = scanner.next();
 
@@ -80,26 +80,17 @@ public class UserInterface {
         System.out.println("Enter desired membership type ");
         String membershipType = scanner.next();
 
-        Discipline discipline1 = null;
         String discipline ="";
 
         if (membershipType.equalsIgnoreCase("Active")){
             System.out.println("Enter discipline");
-            Scanner scannerTwo = new Scanner(System.in);
+            discipline = scanner.next();
 
-            switch (discipline.toLowerCase()){
-                case "crawl" -> discipline1 = Discipline.CRAWL;
-                case "back crawl", "backcrawl" -> discipline1 = Discipline.BACK_CRAWL;
-                case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
-                case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
-            }
         }
-
-        boolean isAdded = controller.addMovie();
-
-
-
-
+        boolean isAdded = controller.addMember(name, age, membershipType, discipline);
+        if(isAdded){
+            System.out.println("The new member was added.");
+        }
     }
     public void isCompeting(){
         System.out.println("Enter discipline");
