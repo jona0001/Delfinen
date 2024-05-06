@@ -5,6 +5,7 @@ import data_source.FileHandler;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Delfin {
 
@@ -54,5 +55,13 @@ public class Delfin {
         return members;
     }
 
-
+    public List<Member> getDebtors(){
+        List<Member> debtors = new ArrayList<>();
+        for(Member member : members){
+            if(!member.getMembership().isPaid()){
+                debtors.add(member);
+            }
+        }
+        return debtors;
+    }
 }

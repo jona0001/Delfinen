@@ -6,7 +6,7 @@ import domain_model.Member;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class Controller {
     private Delfin delfin;
@@ -23,5 +23,9 @@ public class Controller {
 
     public ArrayList<Member> getAllMembers() {
         return delfin.getAllMembers();
+    }
+
+    public List<Member> getDebtors(){
+        return delfin.getDebtors();
     }
 }

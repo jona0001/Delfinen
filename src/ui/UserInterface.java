@@ -24,6 +24,7 @@ public class UserInterface {
             switch (menuChoice) {
                 case 1 -> addNewMember();
                 case 2 -> printMembers();
+                case 3 -> getDebtors();
 //                case 3 -> searchInMovieCollections();
 //                case 4 -> editMovie();
 //                case 5 -> deleteMovie();
@@ -109,15 +110,15 @@ public class UserInterface {
             case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
             case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
         }
-
-
-//        while((!discipline.equals("crawl"))
-//        && (!discipline.equals("back crawl"))
-//        && (!discipline.equals("butterfly"))
-//        && (!discipline.equals("breast stroke"))){
-
     }
 
-
+    public void getDebtors(){
+        System.out.println("Debtors:");
+        for (int i = 0; i < controller.getDebtors().size(); i++) {
+            System.out.printf("%d. ", i);
+            System.out.println();
+            System.out.println(controller.getDebtors().get(i));
+        }
+    }
 
 }

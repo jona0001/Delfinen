@@ -30,6 +30,10 @@ public class Member {
         this.name = name;
     }
 
+    public Membership getMembership() {
+        return membership;
+    }
+
     public void setMembership(Membership membership) {
         this.membership = membership;
     }
