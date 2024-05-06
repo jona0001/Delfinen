@@ -64,4 +64,23 @@ public class Delfin {
         }
         return debtors;
     }
+
+    public int getUpcomingRevenue(){
+        List<Membership> memberships = getMemberships();
+        int revenue = 0;
+        for(Membership membership : memberships){
+            if(membership.getCancellationDate()==null){
+                revenue += membership.getPrice();
+            }
+        };
+        return revenue;
+    }
+
+    public List<Membership> getMemberships(){
+        List<Membership> memberships = new ArrayList<>();
+        for(Member member : members){
+            memberships.add(member.getMembership());
+        }
+        return memberships;
+    }
 }

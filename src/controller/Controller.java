@@ -28,4 +28,8 @@ public class Controller {
     public List<Member> getDebtors(){
         return delfin.getDebtors();
     }
+
+    public int getUpcomingRevenue(){
+        return delfin.getUpcomingRevenue();
+    }
 }

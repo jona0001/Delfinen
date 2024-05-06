@@ -25,8 +25,7 @@ public class UserInterface {
                 case 1 -> addNewMember();
                 case 2 -> printMembers();
                 case 3 -> getDebtors();
-//                case 3 -> searchInMovieCollections();
-//                case 4 -> editMovie();
+                case 4 -> getFutureRevenue();
 //                case 5 -> deleteMovie();
 //                case 6 -> sortMovies();
             }
@@ -48,7 +47,7 @@ public class UserInterface {
         System.out.println("1. Add new member");
         System.out.println("2: See the list of members");
         System.out.println("3: See who did not pay");
-        System.out.println("4: Show all members");
+        System.out.println("4: Show upcoming revenue");
         System.out.println("5: Show upcoming revenue");
         System.out.println("6: Show training results by discipline");
         System.out.println("9: Exit");
@@ -119,6 +118,12 @@ public class UserInterface {
             System.out.println();
             System.out.println(controller.getDebtors().get(i));
         }
+    }
+
+    public void getFutureRevenue(){
+        int upcomingRevenue = controller.getUpcomingRevenue();
+        System.out.println("The swimming club is expected to get: " + upcomingRevenue + "kr.");
+        System.out.println("The subscriptions which are expected to be cancelled are not counted.");
     }
 
 }
