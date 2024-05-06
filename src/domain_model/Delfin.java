@@ -18,12 +18,12 @@ public class Delfin {
 
     //TODO:add price depending on a membership
     public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
-        Membership newMembership = new Membership(1, 500, LocalDateTime.now());
-        if(membership.equals("active") && age > 60){
+        Membership newMembership = new Membership(1, 0, LocalDateTime.now());
+        if(membership.equals("active") && age > 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
-        }else if(membership.equals("passive") && age > 60){
+        }else if(membership.equals("passive") && age > 18){
             newMembership.setMembershipType(MembershipType.PASSIVE_SENIOR);
-        }else if(membership.equals("active") && age < 60){
+        }else if(membership.equals("active") && age < 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_JUNIOR);
         }else{
             newMembership.setMembershipType(MembershipType.PASSIVE_JUNIOR);
@@ -43,6 +43,8 @@ public class Delfin {
             newMember = new Member(name, age);
         }
         newMember.setMembership(newMembership);
+        newMembership.setMember(newMember);
+        newMembership.setPrice();
         boolean isAdded = members.add(newMember);
         fileHandler.saveOneMember(newMember);
         return isAdded;

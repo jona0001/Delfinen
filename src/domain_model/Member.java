@@ -49,9 +49,9 @@ public class Member {
         return "Member information:" +
                 "\n Name = " + name +
                 "\n Age = " + age +
-                "\n Membership ID = " + membership.getMembershipType() +
+                "\n Membership ID = " + membership.getId() +
                 "\n Price = " + membership.getPrice() + "kr" +
-                "\n isPiad = " + membership.isPaid() +
+                "\n isPaid = " + membership.isPaid() +
                 "\n Registration Date = " + membership.getRegistrationDate().toLocalDate() +
                 "\n Cancellation Date = " + membership.getCancellationDate() +
                 "\n Membership Type = " + membership.getMembershipType();
