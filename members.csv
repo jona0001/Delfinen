@@ -1,4 +1,2 @@
-Name,Age,Membership ID,Price,Paid,Date,Cancel date,Type
-
-Clarissa,45,1,500,false,2024-05-06T10:52:50.347931200,null,PASSIVE_SENIOR,
-Jack,34,1,1600,false,2024-05-06T10:53:09.667851300,null,ACTIVE_SENIOR,
+Name,Age,Membership ID,Price,Paid,Date,Cancel date,TypeClarissa,45,569365,500,false,2024-05-06T11:11:00.894487600,null,PASSIVE_SENIOR,
+jack,67,549771,1200,false,2024-05-06T11:11:23.296808800,null,ACTIVE_SENIOR,

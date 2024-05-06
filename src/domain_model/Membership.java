@@ -1,10 +1,11 @@
 package domain_model;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Membership {
-    private static int IDs = 0;
-    private int id;
+    //private static int IDs = 0;
+    private int id = 0;
     private int price;
     private boolean isPaid;
     private Member member;
@@ -14,7 +15,7 @@ public class Membership {
 
     public Membership(int id, int price, boolean isPaid,
                       LocalDateTime registrationDate, LocalDateTime cancellationDate, MembershipType membershipType) {
-        this.id = ++IDs;
+        this.id = id;
         this.price = price;
         this.isPaid = isPaid;
         this.registrationDate = registrationDate;
@@ -22,13 +23,13 @@ public class Membership {
         this.membershipType = membershipType;
     }
 
+
     public void setMember(Member member) {
         this.member = member;
     }
 
-    public Membership(int id, int price, LocalDateTime registrationDate) {
-        this.id = id;
-        this.price = price;
+    public Membership(LocalDateTime registrationDate) {
+        this.id = ThreadLocalRandom.current().nextInt(1, 999999+1);
         this.registrationDate = registrationDate;
     }
 
