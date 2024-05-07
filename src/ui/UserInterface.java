@@ -26,7 +26,7 @@ public class UserInterface {
                 case 2 -> printMembers();
                 case 3 -> getDebtors();
                 case 4 -> getFutureRevenue();
-//                case 5 -> deleteMovie();
+                case 5 -> getCompetingSwimmers();
 //                case 6 -> sortMovies();
             }
         }
@@ -48,7 +48,7 @@ public class UserInterface {
         System.out.println("2: See the list of members");
         System.out.println("3: See who did not pay");
         System.out.println("4: Show upcoming revenue");
-        System.out.println("5: Show upcoming revenue");
+        System.out.println("5: get competing Swimmers");
         System.out.println("6: Show training results by discipline");
         System.out.println("9: Exit");
         System.out.println("*****************");
@@ -125,5 +125,16 @@ public class UserInterface {
         System.out.println("The swimming club is expected to get: " + upcomingRevenue + "kr.");
         System.out.println("The subscriptions which are expected to be cancelled are not counted.");
     }
+
+    public void getCompetingSwimmers(){
+        System.out.println("Competing members:");
+        for (int i = 0; i < controller.getCompetingSwimmers().size(); i++) {
+            System.out.printf("%d. ", i);
+            System.out.println();
+            System.out.println(controller.getCompetingSwimmers().get(i));
+        }
+    }
+
+
 
 }

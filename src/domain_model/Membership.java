@@ -22,6 +22,9 @@ public class Membership {
         this.cancellationDate = cancellationDate;
         this.membershipType = membershipType;
     }
+    public Membership( MembershipType membershipType) {
+        this.membershipType = membershipType;
+    }
 
 
     public void setMember(Member member) {
@@ -98,4 +101,7 @@ public class Membership {
         // Remove the trailing comma and return the CSV string
         return csvBuilder.toString();
     }
+
+
+
 }

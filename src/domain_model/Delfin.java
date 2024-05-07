@@ -1,7 +1,5 @@
 package domain_model;
-
 import data_source.FileHandler;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,9 +10,17 @@ public class Delfin {
     private ArrayList<Member> members;
     private ArrayList<Team> teams = new ArrayList<>();
     private FileHandler fileHandler = new FileHandler();
-
+    private ArrayList<CompetingMember> competingMembers;
     public Delfin(ArrayList<Member> members) {
         this.members = members;
+    }
+
+    public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
+        this.competingMembers = competingMembers;
+    }
+
+    public ArrayList<CompetingMember> getCompetingMembers() {
+        return competingMembers;
     }
 
     //TODO:add price depending on a membership
@@ -39,7 +45,7 @@ public class Delfin {
         }
         Member newMember;
         if(membership.equalsIgnoreCase("active")){
-            newMember = new CompetingMember(age, name, discipline1);
+            newMember = new CompetingMember(name, age, discipline1);
         } else{
             newMember = new Member(name, age);
         }
@@ -53,6 +59,11 @@ public class Delfin {
 
     public ArrayList<Member> getAllMembers(){
         return members;
+    }
+
+    public ArrayList<CompetingMember> loadCompeting(){
+        ArrayList<CompetingMember> competingMembers = fileHandler.loadCompetingMembers();
+        return competingMembers;
     }
 
     public List<Member> getDebtors(){
@@ -83,4 +94,18 @@ public class Delfin {
         }
         return memberships;
     }
+
+    /*
+    public List<Member> getCompetingSwimmers() {
+        List<Member> competingSwimmers = new ArrayList<>();
+        for (Member member : members) {
+
+
+            }
+        }
+        return competingSwimmers;
+    }
+
+     */
+
 }

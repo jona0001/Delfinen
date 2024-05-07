@@ -1,8 +1,6 @@
 package data_source;
 
-import domain_model.Member;
-import domain_model.Membership;
-import domain_model.MembershipType;
+import domain_model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,9 +12,16 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-public void saveOneMember(Member member) throws FileNotFoundException {
+    public void saveOneMember(Member member) throws FileNotFoundException {
         PrintStream out = new PrintStream(new FileOutputStream(("members.csv"), true));
+        PrintStream competing = new PrintStream(new FileOutputStream(("CompetingMembers.csv"), true));
         out.println(member.toCSV());
+
+        if (member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR ||
+                member.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR) {
+            CompetingMember competingMember = (CompetingMember) member;
+            competing.println(competingMember.toCompetingCSV());
+        }
     }
 
     public ArrayList<Member> loadMembers() {
@@ -37,8 +42,8 @@ public void saveOneMember(Member member) throws FileNotFoundException {
                     Integer.parseInt(attributes[1]));// age);
 
             LocalDateTime cancellationDate = null; //to check whether cancellation date in the file is "null"
-            if(!attributes[6].equals("null")){//if not to check it will be NullPointerException
-                cancellationDate= LocalDateTime.parse(attributes[6]);
+            if (!attributes[6].equals("null")) {//if not to check it will be NullPointerException
+                cancellationDate = LocalDateTime.parse(attributes[6]);
             }
 
             Membership membership = new Membership(
@@ -50,10 +55,40 @@ public void saveOneMember(Member member) throws FileNotFoundException {
                     MembershipType.valueOf(attributes[7])
             );
             member.setMembership(membership);
-           memberFromCSVArr.add(member);
+            memberFromCSVArr.add(member);
         }
         sc.close();
         return memberFromCSVArr;
     }
 
+    public ArrayList<CompetingMember> loadCompetingMembers() {
+        File membersDB = new File("competingMembers.csv");
+        ArrayList<CompetingMember> memberFromCSVArr = new ArrayList();
+        Scanner sc;
+        try {
+            sc = new Scanner(membersDB);
+            sc.nextLine();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] attributes = line.split(",");
+            CompetingMember competingMember = new CompetingMember(
+                    attributes[0], // name
+                    Integer.parseInt(attributes[1]), // age
+                    Discipline.valueOf(attributes[2])); // makes string to a discipline type.
+
+
+            Membership competingMembership = new Membership(
+                    MembershipType.valueOf(attributes[3])
+            );
+
+            competingMember.setMembership(competingMembership);
+            memberFromCSVArr.add(competingMember);
+        }
+        sc.close();
+        return memberFromCSVArr;
+
+    }
 }
