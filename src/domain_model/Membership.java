@@ -79,14 +79,13 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership{" +
+        return "Membership" +
                 "id=" + id +
                 ", price=" + price +
                 ", isPaid=" + isPaid +
                 ", registrationDate=" + registrationDate +
                 ", cancellationDate=" + cancellationDate +
-                ", membershipType=" + membershipType +
-                '}';
+                ", membershipType=" + membershipType;
     }
 
     public String toCSV() {
