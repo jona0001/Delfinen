@@ -81,11 +81,11 @@ public class Membership {
     public String toString() {
         return "Membership" +
                 "id=" + id +
-                ", price=" + price +
-                ", isPaid=" + isPaid +
-                ", registrationDate=" + registrationDate +
-                ", cancellationDate=" + cancellationDate +
-                ", membershipType=" + membershipType;
+                ", price= " + price +
+                ", isPaid= " + isPaid +
+                ", registrationDate= " + registrationDate +
+                ", cancellationDate= " + cancellationDate +
+                ", membershipType= " + membershipType;
     }
 
     public String toCSV() {
