@@ -11,6 +11,7 @@ public class Delfin {
     private ArrayList<Team> teams = new ArrayList<>();
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<CompetingMember> competingMembers;
+
     public Delfin(ArrayList<Member> members) {
         this.members = members;
     }
@@ -53,6 +54,7 @@ public class Delfin {
         newMembership.setMember(newMember);
         newMembership.setPrice();
         boolean isAdded = members.add(newMember);
+        if(newMember instanceof CompetingMember) competingMembers.add((CompetingMember) newMember);
         fileHandler.saveOneMember(newMember);
         return isAdded;
     }

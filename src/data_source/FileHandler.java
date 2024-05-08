@@ -62,7 +62,7 @@ public class FileHandler {
     }
 
     public ArrayList<CompetingMember> loadCompetingMembers() {
-        File membersDB = new File("competingMembers.csv");
+        File membersDB = new File("CompetingMembers.csv");
         ArrayList<CompetingMember> memberFromCSVArr = new ArrayList();
         Scanner sc;
         try {

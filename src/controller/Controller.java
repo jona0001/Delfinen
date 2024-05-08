@@ -12,9 +12,10 @@ import java.util.Map;
 
 public class Controller {
     private Delfin delfin;
-    private FileHandler fileHandler = new FileHandler();
+    private FileHandler fileHandler;
 
     public Controller() {
+        this.fileHandler = new FileHandler();
         this.delfin = new Delfin(fileHandler.loadMembers());
         delfin.setCompetingMembers(fileHandler.loadCompetingMembers());
     }
