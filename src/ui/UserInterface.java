@@ -18,6 +18,7 @@ public class UserInterface {
     }
 
     public void start() throws FileNotFoundException {
+        controller.loadFromFile();
         int sentinel = 9;
         while (menuChoice != sentinel) {
             myMenuText();
@@ -44,12 +45,13 @@ public class UserInterface {
 
     public void myMenuText() {
         System.out.println("***** Menu *****");
-        System.out.println("1. Add new member");
+        System.out.println("1. Add a new member to the club");
         System.out.println("2: See the list of members");
         System.out.println("3: See who did not pay");
-        System.out.println("4: Show upcoming revenue");
-        System.out.println("5: get competing Swimmers");
-        System.out.println("6: Show training results by discipline");
+        System.out.println("4: Show upcoming revenue for Delfinen");
+        System.out.println("5: See a list of all competing members");
+        System.out.println("6: Show top 5 in each discipline");
+        System.out.println("7. Register training results for a member");
         System.out.println("9: Exit");
         System.out.println("*****************");
         try {
