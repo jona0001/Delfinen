@@ -1,9 +1,7 @@
 package controller;
 
 import data_source.FileHandler;
-import domain_model.CompetingMember;
-import domain_model.Delfin;
-import domain_model.Member;
+import domain_model.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -39,6 +37,12 @@ public class Controller {
         fileHandler.loadCompetingMembers();
         fileHandler.loadMembers();
     }
+
+    public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
+        return delfin.getSortedMembershiptype(membershipType, discipline);
+    }
+
+
 
     public ArrayList<CompetingMember> getCompetingSwimmers() {
         return delfin.getCompetingMembers();

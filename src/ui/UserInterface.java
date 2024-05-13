@@ -6,6 +6,7 @@ import data_source.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.List;
 
 public class UserInterface {
     private Scanner scanner;
@@ -28,7 +29,7 @@ public class UserInterface {
                 case 3 -> getDebtors();
                 case 4 -> getFutureRevenue();
                 case 5 -> getCompetingSwimmers();
-                case 6 -> showMembersDisciplin();
+                case 6 -> sortDisciplineAndType();
             }
         }
     }
@@ -41,7 +42,6 @@ public class UserInterface {
             System.out.println(controller.getAllMembers().get(i));
         }
     }
-
 
     public void myMenuText() {
         System.out.println("***** Menu *****");
@@ -137,7 +137,33 @@ public class UserInterface {
         }
     }
 
-    public void showMembersDisciplin() {
+
+
+    public void sortDisciplineAndType(){
+        MembershipType membershipType = null;
+        System.out.println("Choose one - 1. for Senior. 2. for Junior");
+        int membershipInput = scanner.nextInt();
+        switch (membershipInput) {
+            case 1 -> membershipType = MembershipType.ACTIVE_SENIOR;
+            case 2 -> membershipType = MembershipType.ACTIVE_JUNIOR;
+            // kald ny method i delfin igennem controller. Sæt parameter som memebership.active senior
+        }
+        System.out.println("Enter Discipline");
+        System.out.println("Choose one");
+        System.out.println("1. Butterfly");
+        System.out.println("2. Crawl");
+        System.out.println("3. Breast stroke");
+        System.out.println("4. Back Crawl");
+        int disciplineInput = scanner.nextInt();
+        Discipline discipline = null;
+        switch (disciplineInput){
+            case 1 -> discipline = Discipline.BUTTERFLY;
+            case 2 -> discipline = Discipline.CRAWL;
+            case 3 -> discipline = Discipline.BREAST_STROKE;
+            case 4 -> discipline = Discipline.BACK_CRAWL;
+        }
+        List<CompetingMember> sort = controller.sortMembers(membershipType,discipline);
+        System.out.println(sort);
     }
 
 }

@@ -97,20 +97,25 @@ public class Delfin {
         return memberships;
     }
 
-    public List<CompetingMember> getSortedMembershiptype(MembershipType membershiptype ) {
+    public List<CompetingMember> getSortedMembershiptype(MembershipType membershiptype, Discipline discipline ) {
         List<CompetingMember> sortCompetingMemember = new ArrayList<>();
-        for(CompetingMember member : competingMembers) {
-            if (member.getMembership().getMembershipType().equals(membershiptype)) {
-                sortCompetingMemember.add(member);
+        List<CompetingMember> sortCompetingMemeberDescipline = new ArrayList<>();
+
+        for (CompetingMember sortedMember : competingMembers) {
+            if (sortedMember.getMembership().getMembershipType().equals(membershiptype)) {
+                sortCompetingMemember.add(sortedMember);
+            }
+            for (CompetingMember sortedDescipline : sortCompetingMemember) {
+                if (sortedMember.getSwimmingDiscipline().equals(discipline)) {
+                    sortCompetingMemeberDescipline.add(sortedDescipline);
+                }
             }
         }
-        return sortCompetingMemember;
-    }
-    public List<CompetingMember> getMembersByDisciplin(Discipline disciplinType) {
-        List<Discipline> sortDisciplin = new ArrayList<>();
-        for(Discipline type : )
+        return sortCompetingMemeberDescipline;
     }
 }
+
+
 
     /*
     public List<Member> getCompetingSwimmers() {
