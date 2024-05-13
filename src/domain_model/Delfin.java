@@ -9,6 +9,10 @@ public class Delfin {
 
     private ArrayList<Member> members;
     private ArrayList<Team> teams = new ArrayList<>();
+    Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
+    Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
+    Team juniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
+    Team juniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<CompetingMember> competingMembers;
 
@@ -47,6 +51,7 @@ public class Delfin {
         Member newMember;
         if(membership.equalsIgnoreCase("active")){
             newMember = new CompetingMember(name, age, discipline1);
+            //teams.get(0).addCompetingMembers((CompetingMember) newMember);
         } else{
             newMember = new Member(name, age);
         }
@@ -54,9 +59,27 @@ public class Delfin {
         newMembership.setMember(newMember);
         newMembership.setPrice();
         boolean isAdded = members.add(newMember);
-        if(newMember instanceof CompetingMember) competingMembers.add((CompetingMember) newMember);
+        if(newMember instanceof CompetingMember){
+            competingMembers.add((CompetingMember) newMember);
+            addMemberToTeam((CompetingMember) newMember);
+        }
         fileHandler.saveOneMember(newMember);
         return isAdded;
+    }
+
+
+
+    public void addMemberToTeam(CompetingMember competingMember){
+        if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
+        competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL){
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+        }else if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.CRAWL){
+            juniorCrawlTeam.addCompetingMembers(competingMember);
+        }else if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY){
+            juniorButterflyTeam.addCompetingMembers(competingMember);
+        }
     }
 
     public ArrayList<Member> getAllMembers(){

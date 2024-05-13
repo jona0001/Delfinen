@@ -5,4 +5,6 @@ public enum Discipline {
     CRAWL,
     BACK_CRAWL,
     BREAST_STROKE;
+
+
 }
