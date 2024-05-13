@@ -28,7 +28,7 @@ public class UserInterface {
                 case 3 -> getDebtors();
                 case 4 -> getFutureRevenue();
                 case 5 -> getCompetingSwimmers();
-//                case 6 -> sortMovies();
+                case 6 -> showMembersDisciplin();
             }
         }
     }
@@ -50,7 +50,7 @@ public class UserInterface {
         System.out.println("3: See who did not pay");
         System.out.println("4: Show upcoming revenue for Delfinen");
         System.out.println("5: See a list of all competing members");
-        System.out.println("6: Show top 5 in each discipline");
+        System.out.println("6: Show members by disciplin");
         System.out.println("7. Register training results for a member");
         System.out.println("9: Exit");
         System.out.println("*****************");
@@ -137,6 +137,7 @@ public class UserInterface {
         }
     }
 
-
+    public void showMembersDisciplin() {
+    }
 
 }
