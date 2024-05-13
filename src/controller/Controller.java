@@ -23,8 +23,6 @@ public class Controller {
     public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
         return delfin.addMember(name, age, membership, discipline);
     }
-
-
     public ArrayList<Member> getAllMembers() {
         return delfin.getAllMembers();
     }
@@ -35,6 +33,11 @@ public class Controller {
 
     public int getUpcomingRevenue(){
         return delfin.getUpcomingRevenue();
+    }
+
+    public void loadFromFile(){
+        fileHandler.loadCompetingMembers();
+        fileHandler.loadMembers();
     }
 
     public ArrayList<CompetingMember> getCompetingSwimmers() {
