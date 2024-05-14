@@ -35,7 +35,7 @@ public class Delfin {
         return competingMembers;
     }
 
-    //TODO:add price depending on a membership
+    //TODO:refactor this so our method arent so big and our program rely so much about on a single method/function.
     public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
         Membership newMembership = new Membership(LocalDateTime.now());
         if(membership.equals("active") && age > 18){
@@ -75,7 +75,7 @@ public class Delfin {
     }
 
 
-
+//TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
     public void addMemberToTeam(CompetingMember competingMember){
         if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
         competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL){
