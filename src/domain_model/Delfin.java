@@ -88,19 +88,19 @@ public class Delfin {
             juniorButterflyTeam.addCompetingMembers(competingMember);
         } else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE){
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+            juniorBreastStrokeTeam.addCompetingMembers(competingMember);
         }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL) {
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+            seniorBackCrawlTeam.addCompetingMembers(competingMember);
         }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE) {
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+            seniorBreastStrokeTeam.addCompetingMembers(competingMember);
         }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY) {
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+            seniorButterflyTeam.addCompetingMembers(competingMember);
         }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.CRAWL) {
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+            seniorCrawlTeam.addCompetingMembers(competingMember);
         }
     }
 
