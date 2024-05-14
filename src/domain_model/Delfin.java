@@ -9,10 +9,17 @@ public class Delfin {
 
     private ArrayList<Member> members;
     private ArrayList<Team> teams = new ArrayList<>();
+
     Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
     Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
     Team juniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
     Team juniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
+
+    Team seniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
+    Team seniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
+    Team seniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
+    Team seniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
+
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<CompetingMember> competingMembers;
 
@@ -79,6 +86,21 @@ public class Delfin {
         }else if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
                 competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY){
             juniorButterflyTeam.addCompetingMembers(competingMember);
+        } else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE){
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL) {
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE) {
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY) {
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
+                competingMember.getSwimmingDiscipline() == Discipline.CRAWL) {
+            juniorBackCrawlTeam.addCompetingMembers(competingMember);
         }
     }
 
@@ -144,12 +166,9 @@ public class Delfin {
     public List<Member> getCompetingSwimmers() {
         List<Member> competingSwimmers = new ArrayList<>();
         for (Member member : members) {
-
-
             }
         }
         return competingSwimmers;
     }
-
      */
 

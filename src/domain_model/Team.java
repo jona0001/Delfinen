@@ -13,6 +13,8 @@ public class Team {
         this.discipline = discipline;
     }
 
+
+
     public void addCompetingMembers(CompetingMember member){
         competingMembers.add(member);
     }

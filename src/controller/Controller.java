@@ -47,6 +47,8 @@ public class Controller {
     public ArrayList<CompetingMember> getCompetingSwimmers() {
         return delfin.getCompetingMembers();
     }
+
+
     /*
     public List <Member>getCompetingSwimmers(){
         return delfin.getCompetingSwimmers();

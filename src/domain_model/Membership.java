@@ -52,7 +52,6 @@ public class Membership {
         }
     }
 
-
     public int getId() {
         return id++;
     }
@@ -100,7 +99,4 @@ public class Membership {
         // Remove the trailing comma and return the CSV string
         return csvBuilder.toString();
     }
-
-
-
 }
