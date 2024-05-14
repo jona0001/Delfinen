@@ -1,22 +1,21 @@
 package domain_model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Result {
-    private int result;
-    private Calendar date;
+    private double result;
+    private LocalDateTime date;
 
-    public Result(int result, Calendar date) {
+    public Result(int result, LocalDateTime date) {
         this.result = result;
         this.date = date;
     }
 
-    public int getResult() {
+    public double getResult() {
         return result;
     }
 
-    public Calendar getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
