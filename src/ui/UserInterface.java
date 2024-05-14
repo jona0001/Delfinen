@@ -136,16 +136,20 @@ public class UserInterface {
 
     public void printCompetingMembers(List<CompetingMember> competingMembers){
         System.out.println();
-        for(CompetingMember member : competingMembers){
-            System.out.printf("Member name: %s\nTeam: ", member.getName());
-            if(member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR){
-                System.out.println("Juniors");
-            }else{
-                System.out.println("Seniors");
+        if(competingMembers.isEmpty()){
+            System.out.println("No members found.");
+        } else{
+            for(CompetingMember member : competingMembers){
+                System.out.printf("Member name: %s\nTeam: ", member.getName());
+                if(member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR){
+                    System.out.println("Juniors");
+                }else{
+                    System.out.println("Seniors");
+                }
+                System.out.printf("Discipline:%s", member.getSwimmingDiscipline() + "\n");
+                System.out.println("===================");
             }
-            System.out.printf("Discipline:%s", member.getSwimmingDiscipline() + "\n");
         }
-        System.out.println("===================");
     }
 
 
