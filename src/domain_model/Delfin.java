@@ -36,7 +36,7 @@ public class Delfin {
     }
 
     //TODO:refactor this so our method arent so big and our program rely so much about on a single method/function.
-    public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
+    public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
         Membership newMembership = new Membership(LocalDateTime.now());
         if(membership.equals("active") && age > 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
@@ -48,16 +48,9 @@ public class Delfin {
             newMembership.setMembershipType(MembershipType.PASSIVE_JUNIOR);
         }
 
-        Discipline discipline1 = null;
-        switch (discipline.toLowerCase()){
-            case "crawl" -> discipline1 = Discipline.CRAWL;
-            case "back crawl", "backcrawl" -> discipline1 = Discipline.BACK_CRAWL;
-            case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
-            case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
-        }
         Member newMember;
         if(membership.equalsIgnoreCase("active")){
-            newMember = new CompetingMember(name, age, discipline1);
+            newMember = new CompetingMember(name, age, discipline);
             //teams.get(0).addCompetingMembers((CompetingMember) newMember);
         } else{
             newMember = new Member(name, age);
@@ -142,21 +135,22 @@ public class Delfin {
         return memberships;
     }
 
-    public List<CompetingMember> getSortedMembershiptype(MembershipType membershiptype, Discipline discipline ) {
-        List<CompetingMember> sortCompetingMemember = new ArrayList<>();
-        List<CompetingMember> sortCompetingMemeberDescipline = new ArrayList<>();
+    public List<CompetingMember> getMembersByAgeAndDiscipline(MembershipType membershiptype, Discipline discipline ) {
+        List<CompetingMember> sortCompetingMember = new ArrayList<>();
+        List<CompetingMember> sortCompetingMemberDiscipline = new ArrayList<>();
 
-        for (CompetingMember sortedMember : competingMembers) {
-            if (sortedMember.getMembership().getMembershipType().equals(membershiptype)) {
-                sortCompetingMemember.add(sortedMember);
-            }
-            for (CompetingMember sortedDescipline : sortCompetingMemember) {
-                if (sortedMember.getSwimmingDiscipline().equals(discipline)) {
-                    sortCompetingMemeberDescipline.add(sortedDescipline);
-                }
+        for (CompetingMember member : competingMembers) {
+            if (member.getMembership().getMembershipType().equals(membershiptype)) {
+                sortCompetingMember.add(member);
             }
         }
-        return sortCompetingMemeberDescipline;
+
+        for (CompetingMember member : sortCompetingMember) {
+            if (member.getSwimmingDiscipline().equals(discipline)) {
+                sortCompetingMemberDiscipline.add(member);
+            }
+        }
+        return sortCompetingMemberDiscipline;
     }
 }
 

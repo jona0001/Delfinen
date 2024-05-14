@@ -2,6 +2,7 @@ package ui;
 import controller.Controller;
 import domain_model.*;
 import data_source.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -88,30 +89,29 @@ public class UserInterface {
         System.out.println("Enter desired membership type ");
         String membershipType = scanner.next();
 
-        String discipline ="";
 
+        Discipline discipline = null;
         if (membershipType.equalsIgnoreCase("Active")){
-            System.out.println("Enter discipline");
-            discipline = scanner.next();
+            System.out.println("Enter Discipline, choose one:");
+            System.out.println("1. Butterfly");
+            System.out.println("2. Crawl");
+            System.out.println("3. Breast stroke");
+            System.out.println("4. Back Crawl");
+            int disciplineInput = scanner.nextInt();
 
+            switch (disciplineInput){
+                case 1 -> discipline = Discipline.BUTTERFLY;
+                case 2 -> discipline = Discipline.CRAWL;
+                case 3 -> discipline = Discipline.BREAST_STROKE;
+                case 4 -> discipline = Discipline.BACK_CRAWL;
+            }
         }
         boolean isAdded = controller.addMember(name, age, membershipType, discipline);
         if(isAdded){
             System.out.println("The new member was added.");
         }
     }
-    public void isCompeting(){
-        System.out.println("Enter discipline");
-        Scanner scannerTwo = new Scanner(System.in);
-        String discipline = scannerTwo.next();
-        Discipline discipline1 = null;
-        switch (discipline.toLowerCase()){
-            case "crawl" -> discipline1 = Discipline.CRAWL;
-            case "back crawl", "backcrawl" -> discipline1 = Discipline.BACK_CRAWL;
-            case "butterfly" -> discipline1 = Discipline.BUTTERFLY;
-            case "breast stroke", "breaststroke" -> discipline1 = Discipline.BREAST_STROKE;
-        }
-    }
+
 
     public void getDebtors(){
         System.out.println("Debtors:");
@@ -129,27 +129,36 @@ public class UserInterface {
     }
 
     public void getCompetingSwimmers(){
+        List<CompetingMember> competingMembers = controller.getCompetingSwimmers();
         System.out.println("Competing members:");
-        for (int i = 0; i < controller.getCompetingSwimmers().size(); i++) {
-            System.out.printf("%d. ", i);
-            System.out.println();
-            System.out.println(controller.getCompetingSwimmers().get(i));
-        }
+       printCompetingMembers(competingMembers);
     }
 
+    public void printCompetingMembers(List<CompetingMember> competingMembers){
+        System.out.println();
+        for(CompetingMember member : competingMembers){
+            System.out.printf("Member name: %s\nTeam: ", member.getName());
+            if(member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR){
+                System.out.println("Juniors");
+            }else{
+                System.out.println("Seniors");
+            }
+            System.out.printf("Discipline:%s", member.getSwimmingDiscipline() + "\n");
+        }
+        System.out.println("===================");
+    }
 
 
     public void sortDisciplineAndType(){
         MembershipType membershipType = null;
-        System.out.println("Choose one - 1. for Senior. 2. for Junior");
+        System.out.println("Choose one: \n1. for Senior\n2. for Junior");
         int membershipInput = scanner.nextInt();
         switch (membershipInput) {
             case 1 -> membershipType = MembershipType.ACTIVE_SENIOR;
             case 2 -> membershipType = MembershipType.ACTIVE_JUNIOR;
             // kald ny method i delfin igennem controller. Sæt parameter som memebership.active senior
         }
-        System.out.println("Enter Discipline");
-        System.out.println("Choose one");
+        System.out.println("Enter Discipline, choose one:");
         System.out.println("1. Butterfly");
         System.out.println("2. Crawl");
         System.out.println("3. Breast stroke");
@@ -162,8 +171,8 @@ public class UserInterface {
             case 3 -> discipline = Discipline.BREAST_STROKE;
             case 4 -> discipline = Discipline.BACK_CRAWL;
         }
-        List<CompetingMember> sort = controller.sortMembers(membershipType,discipline);
-        System.out.println(sort);
+        List<CompetingMember> sortedList = controller.sortMembers(membershipType,discipline);
+        printCompetingMembers(sortedList);
     }
 
 }

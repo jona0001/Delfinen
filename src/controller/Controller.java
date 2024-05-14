@@ -6,7 +6,6 @@ import domain_model.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Controller {
     private Delfin delfin;
@@ -18,7 +17,7 @@ public class Controller {
         delfin.setCompetingMembers(fileHandler.loadCompetingMembers());
     }
 
-    public boolean addMember(String name, int age, String membership, String discipline) throws FileNotFoundException {
+    public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
         return delfin.addMember(name, age, membership, discipline);
     }
     public ArrayList<Member> getAllMembers() {
@@ -39,7 +38,7 @@ public class Controller {
     }
 
     public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
-        return delfin.getSortedMembershiptype(membershipType, discipline);
+        return delfin.getMembersByAgeAndDiscipline(membershipType, discipline);
     }
 
 
