@@ -51,7 +51,7 @@ public class UserInterface {
         System.out.println("3: See who did not pay");
         System.out.println("4: Show upcoming revenue for Delfinen");
         System.out.println("5: See a list of all competing members");
-        System.out.println("6: Show members by disciplin");
+        System.out.println("6: Show teams");
         System.out.println("7. Register training results for a member");
         System.out.println("9: Exit");
         System.out.println("*****************");
@@ -140,7 +140,7 @@ public class UserInterface {
             System.out.println("No members found.");
         } else{
             for(CompetingMember member : competingMembers){
-                System.out.printf("Member name: %s\nTeam: ", member.getName());
+                System.out.printf("Swimmer name: %s\nTeam: ", member.getName());
                 if(member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR){
                     System.out.println("Juniors");
                 }else{
@@ -155,18 +155,18 @@ public class UserInterface {
 
     public void sortDisciplineAndType(){
         MembershipType membershipType = null;
-        System.out.println("Choose one: \n1. for Senior\n2. for Junior");
+        System.out.println("Choose category: \n1. Seniors\n2. Juniors");
         int membershipInput = scanner.nextInt();
         switch (membershipInput) {
             case 1 -> membershipType = MembershipType.ACTIVE_SENIOR;
             case 2 -> membershipType = MembershipType.ACTIVE_JUNIOR;
             // kald ny method i delfin igennem controller. Sæt parameter som memebership.active senior
         }
-        System.out.println("Enter Discipline, choose one:");
-        System.out.println("1. Butterfly");
-        System.out.println("2. Crawl");
-        System.out.println("3. Breast stroke");
-        System.out.println("4. Back Crawl");
+        System.out.println("Choose team by discipline:");
+        System.out.println("1. Butterfly team");
+        System.out.println("2. Crawl team");
+        System.out.println("3. Breast stroke team");
+        System.out.println("4. Back Crawl team");
         int disciplineInput = scanner.nextInt();
         Discipline discipline = null;
         switch (disciplineInput){
