@@ -58,6 +58,7 @@ public class Delfin {
         // Call the addMemberToSystem method to handle the addition
         return addMemberToSystem(newMember, newMembership);
     }
+
     private boolean addMemberToSystem(Member newMember, Membership newMembership) throws FileNotFoundException {
         newMember.setMembership(newMembership);
         newMembership.setMember(newMember);
@@ -73,7 +74,50 @@ public class Delfin {
 
 
     //TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
+
+
+
+    public void addMemberToTeam(CompetingMember competingMember) {
+        MembershipType membershipType = competingMember.getMembership().getMembershipType();
+        Discipline swimmingDiscipline = competingMember.getSwimmingDiscipline();
+
+        switch (membershipType) {
+            case ACTIVE_JUNIOR:
+                switch (swimmingDiscipline) {
+                    case BACK_CRAWL ->
+                            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+                    case CRAWL ->
+                            juniorCrawlTeam.addCompetingMembers(competingMember);
+                    case BUTTERFLY ->
+                            juniorButterflyTeam.addCompetingMembers(competingMember);
+                    case BREAST_STROKE ->
+                            juniorBreastStrokeTeam.addCompetingMembers(competingMember);
+                    default -> {
+                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+                    }
+                }
+                break; // Add break statement
+            case ACTIVE_SENIOR:
+                switch (swimmingDiscipline) {
+                    case BACK_CRAWL ->
+                            seniorBackCrawlTeam.addCompetingMembers(competingMember);
+                    case BREAST_STROKE ->
+                            seniorBreastStrokeTeam.addCompetingMembers(competingMember);
+                    case BUTTERFLY ->
+                            seniorButterflyTeam.addCompetingMembers(competingMember);
+                    case CRAWL ->
+                            seniorCrawlTeam.addCompetingMembers(competingMember);
+                    default -> {
+                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+
+                    }
+                }
+        }
+    }
+
+    /*
     public void addMemberToTeam(CompetingMember competingMember){
+
         if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
         competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL){
             juniorBackCrawlTeam.addCompetingMembers(competingMember);
@@ -100,6 +144,8 @@ public class Delfin {
             seniorCrawlTeam.addCompetingMembers(competingMember);
         }
     }
+
+     */
 
     public ArrayList<Member> getAllMembers(){
         return members;
@@ -170,14 +216,4 @@ public class Delfin {
 }
 
 
-
-    /*
-    public List<Member> getCompetingSwimmers() {
-        List<Member> competingSwimmers = new ArrayList<>();
-        for (Member member : members) {
-            }
-        }
-        return competingSwimmers;
-    }
-     */
 

@@ -1,3 +1,4 @@
 Name,Age,Membership ID,Price,Paid,Date,Cancel date,Type
-Jonathan,20,898413,1600,false,15-05-2024,null,ACTIVE_SENIOR,
-bgffresb,34,558351,1600,false,15-05-2024,null,ACTIVE_SENIOR,
+Jonathan,20,898413,1600,true,15-05-2024,null,ACTIVE_SENIOR,
+bgffresb,34,558351,1600,true,15-05-2024,null,ACTIVE_SENIOR,
+Jona,25,981253,1600,true,15-05-2024,null,ACTIVE_SENIOR,
