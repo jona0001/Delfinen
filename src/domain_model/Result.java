@@ -30,16 +30,19 @@ public class Result {
         return date;
     }
 
+    public int getCompetingMemberId() {
+        return competingMemberId;
+    }
+
     @Override
     public String toString() {
         return
-                "Result: " + result +
+                "Result: " + result + "\nid:" + competingMemberId +
                 "\nDate: " + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     public String toCSV() {
         StringBuilder csvBuilder = new StringBuilder();
-        csvBuilder.append(competingMemberId).append(",");
         csvBuilder.append(swimmer.toCompetingCSV());
         csvBuilder.append(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))).append(",");
         csvBuilder.append(result).append(",");

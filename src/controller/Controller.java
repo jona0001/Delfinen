@@ -15,6 +15,8 @@ public class Controller {
         this.fileHandler = new FileHandler();
         this.delfin = new Delfin(fileHandler.loadMembers());
         delfin.setCompetingMembers(fileHandler.loadCompetingMembers());
+        delfin.setResults(fileHandler.loadResults());
+        delfin.pairMembersAndResults();
     }
 
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
@@ -47,12 +49,16 @@ public class Controller {
         return delfin.getCompetingMembers();
     }
 
-    public boolean addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
-       return delfin.addTrainingResult(swimmerNumber, date, result);
+    public void addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
+        delfin.addTrainingResult(swimmerNumber, date, result);
     }
 
-    public List<Result> getTrainingResults(int swimmerNumber) {
+    public Result getTrainingResults(int swimmerNumber) {
         return delfin.getTrainingResults(swimmerNumber);
+    }
+
+    public List<CompetingMember> showTopSwimmers(MembershipType membershipType, Discipline discipline) {
+        return delfin.getTopSwimmers(membershipType, discipline);
     }
 
 

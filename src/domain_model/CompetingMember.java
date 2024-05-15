@@ -1,45 +1,54 @@
 package domain_model;
 
-import java.util.ArrayList;
 
 public class CompetingMember extends Member {
     private Discipline swimmingDiscipline;
-    private ArrayList<Result> trainingResults;
+    private Result trainingResult;
+    private int competingId;
 
     public CompetingMember(String name, int age, Discipline swimmingDiscipline) {
         super(name, age);
         this.swimmingDiscipline = swimmingDiscipline;
-        trainingResults = new ArrayList<>();
     }
 
     public Discipline getSwimmingDiscipline() {
         return swimmingDiscipline;
     }
 
-    public void setSwimmingDiscipline(Discipline swimmingDiscipline) {
-        this.swimmingDiscipline = swimmingDiscipline;
+    public void setCompetingId(int competingId) {
+        this.competingId = competingId;
     }
 
-    public boolean addTrainingResult(Result trainingResult) {
-        return trainingResults.add(trainingResult);
+    public int getCompetingId() {
+        return competingId;
     }
 
-    public ArrayList<Result> getTrainingResults(){
-        return trainingResults;
+    public Result getTrainingResult(){
+        return trainingResult;
     }
 
-    public void setTrainingResults(ArrayList<Result> trainingResults) {
-        this.trainingResults = trainingResults;
+    public void setTrainingResult(Result trainingResult) {
+        this.trainingResult = trainingResult;
     }
 
     public String toCompetingCSV() {
         // Format the movie attributes into CSV format
         StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append(competingId).append(",");
         csvBuilder.append(super.getName()).append(",");
         csvBuilder.append(super.getAge()).append(",");
         csvBuilder.append(swimmingDiscipline.toString()).append(",");
         csvBuilder.append(super.getMembership().getMembershipType().toString()).append(",");
         // Remove the trailing comma and return the CSV string
         return csvBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "CompetingMember{" +
+                "swimmingDiscipline=" + swimmingDiscipline +
+                ", trainingResult=" + trainingResult +
+                ", competingId=" + competingId +
+                '}';
     }
 }

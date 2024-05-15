@@ -2,10 +2,7 @@ package ui;
 
 import controller.Controller;
 import domain_model.*;
-import data_source.*;
-import org.w3c.dom.ls.LSOutput;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.List;
@@ -22,7 +19,7 @@ public class UserInterface {
 
     public void start() throws FileNotFoundException {
         controller.loadFromFile();
-        int sentinel = 9;
+        int sentinel = 10;
         while (menuChoice != sentinel) {
             myMenuText();
             switch (menuChoice) {
@@ -31,14 +28,22 @@ public class UserInterface {
                 case 3 -> getDebtors();
                 case 4 -> getFutureRevenue();
                 case 5 -> getCompetingSwimmers();
-                case 6 -> sortDisciplineAndType();
+                case 6 -> showTeams();
                 case 7 -> registerTrainingResults();
                 case 8 -> showTrainingResults();
+                case 9 -> showTopSwimmers();
             }
         }
     }
 
-
+    private void showTopSwimmers() {
+        System.out.println("top swimmers:");
+        HashMap<MembershipType, Discipline> mapWithUserInput = sortDisciplineAndType();
+        for ( Map.Entry<MembershipType, Discipline> entry : mapWithUserInput.entrySet()) {
+            List<CompetingMember> topSwimmers = controller.showTopSwimmers(entry.getKey(), entry.getValue());
+            printCompetingMembers(topSwimmers);
+        }
+    }
 
 
     private void printMembers() {
@@ -60,7 +65,8 @@ public class UserInterface {
         System.out.println("6: Show teams");
         System.out.println("7. Register training results for a competing swimmer");
         System.out.println("8. See the training results of a competing swimmer");
-        System.out.println("9: Exit");
+        System.out.println("9. See top swimmers");
+        System.out.println("10: Exit");
         System.out.println("*****************");
         try {
             menuChoice = scanner.nextInt();
@@ -79,12 +85,9 @@ public class UserInterface {
         String date = scanner.nextLine();
         System.out.println("Enter the training result:");
         double result = scanner.nextDouble();
-        boolean isAdded = controller.addTrainingResult(swimmerNumber, date, result);
-        if(isAdded){
-            System.out.println("The result was successfully added!");
-        }else{
-            System.out.println("Something went wrong.");
-        }
+        controller.addTrainingResult(swimmerNumber, date, result);
+        System.out.println("The result was successfully added!");
+
     }
 
     private void showTrainingResults() {
@@ -92,10 +95,9 @@ public class UserInterface {
         System.out.println("Enter the number of the swimmer to see their training results:");
         int swimmerNumber = scanner.nextInt();
         scanner.nextLine();
-        List<Result> trainingResults = controller.getTrainingResults(swimmerNumber);
-        for(Result result : trainingResults){
-            System.out.println(result);
-        }
+        Result trainingResult = controller.getTrainingResults(swimmerNumber);
+        System.out.println(trainingResult);
+
     }
 
     public void addNewMember() throws FileNotFoundException {
@@ -189,7 +191,7 @@ public class UserInterface {
     }
 
 
-    public void sortDisciplineAndType() {
+    public HashMap<MembershipType, Discipline> sortDisciplineAndType() {
         MembershipType membershipType = null;
         System.out.println("Choose category: \n1. Seniors\n2. Juniors");
         int membershipInput = scanner.nextInt();
@@ -211,8 +213,18 @@ public class UserInterface {
             case 3 -> discipline = Discipline.BREAST_STROKE;
             case 4 -> discipline = Discipline.BACK_CRAWL;
         }
-        List<CompetingMember> sortedList = controller.sortMembers(membershipType, discipline);
-        printCompetingMembers(sortedList);
+        HashMap<MembershipType, Discipline> mapWithUserInput = new HashMap<>();
+        mapWithUserInput.put(membershipType, discipline);
+        return mapWithUserInput;
+    }
+
+    public void showTeams(){
+        HashMap<MembershipType, Discipline> mapWithUserInput = sortDisciplineAndType();
+        for ( Map.Entry<MembershipType, Discipline> entry : mapWithUserInput.entrySet()) {
+            List<CompetingMember> team = controller.sortMembers(entry.getKey(), entry.getValue());
+            printCompetingMembers(team);
+        }
+
     }
 
 }

@@ -1,5 +1,7 @@
 package domain_model;
 import data_source.FileHandler;
+import utility.CompetingMemberComparator;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,6 +12,7 @@ import java.util.List;
 public class Delfin {
 
     private ArrayList<Member> members;
+    private ArrayList<Result> results;
     private ArrayList<Team> teams = new ArrayList<>();
 
     Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
@@ -29,9 +32,25 @@ public class Delfin {
         this.members = members;
     }
 
+    public void pairMembersAndResults(){
+        for(CompetingMember competingMember : competingMembers){
+            for(Result result : results){
+                if(competingMember.getCompetingId() == result.getCompetingMemberId()){
+                    competingMember.setTrainingResult(result);
+                }
+            }
+
+        }
+    }
+
     public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
         this.competingMembers = competingMembers;
     }
+
+    public void setResults(ArrayList<Result> results) {
+        this.results = results;
+    }
+
 
     public ArrayList<CompetingMember> getCompetingMembers() {
         return competingMembers;
@@ -65,6 +84,7 @@ public class Delfin {
         boolean isAdded = members.add(newMember);
         if (newMember instanceof CompetingMember) {
             competingMembers.add((CompetingMember) newMember);
+            ((CompetingMember) newMember).setCompetingId(competingMembers.size()-1);
             addMemberToTeam((CompetingMember) newMember);
         }
         fileHandler.saveOneMember(newMember);
@@ -135,12 +155,12 @@ public class Delfin {
         return memberships;
     }
 
-    public List<CompetingMember> getMembersByAgeAndDiscipline(MembershipType membershiptype, Discipline discipline ) {
+    public List<CompetingMember> getMembersByAgeAndDiscipline(MembershipType membershipType, Discipline discipline ) {
         List<CompetingMember> sortCompetingMember = new ArrayList<>();
         List<CompetingMember> sortCompetingMemberDiscipline = new ArrayList<>();
 
         for (CompetingMember member : competingMembers) {
-            if (member.getMembership().getMembershipType().equals(membershiptype)) {
+            if (member.getMembership().getMembershipType().equals(membershipType)) {
                 sortCompetingMember.add(member);
             }
         }
@@ -153,19 +173,43 @@ public class Delfin {
         return sortCompetingMemberDiscipline;
     }
 
-    public boolean addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
+    public List<CompetingMember> getTopSwimmers(MembershipType membershipType, Discipline discipline){
+        List<CompetingMember> membersByAgeAndDiscipline = getMembersByAgeAndDiscipline(membershipType, discipline);
+        List<CompetingMember> topSwimmers = new ArrayList<>();
+        List<CompetingMember> topFiveSwimmers = new ArrayList<>();
+        for(CompetingMember swimmer : membersByAgeAndDiscipline){
+            if(swimmer.getTrainingResult()!=null){
+                topSwimmers.add(swimmer);
+            }
+        }
+        topSwimmers.sort(new CompetingMemberComparator());
+        if(topSwimmers.size()>5){
+            for(int i=0; i<5; i++){
+                topFiveSwimmers.add(topSwimmers.get(i));
+            }
+            return topFiveSwimmers;
+        }else{
+            return topSwimmers;
+        }
+    }
+
+    public void addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
 
         LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         Result resultToSave = new Result(competingMembers.get(swimmerNumber), swimmerNumber, result, localDateTime);
-        boolean isAdded = competingMembers.get(swimmerNumber).addTrainingResult(resultToSave);
+        competingMembers.get(swimmerNumber).setTrainingResult(resultToSave);
         fileHandler.saveTrainingResult(resultToSave);
-        return isAdded;
+
     }
 
 
-    public List<Result> getTrainingResults(int swimmerNumber) {
-        competingMembers.get(swimmerNumber).setTrainingResults(fileHandler.loadResults(swimmerNumber));
-        return competingMembers.get(swimmerNumber).getTrainingResults();
+    public Result getTrainingResults(int swimmerNumber) {
+        for(Result result : results){
+            if(result.getCompetingMemberId() == swimmerNumber){
+                return result;
+            }
+        }
+        return null;
     }
 }
 

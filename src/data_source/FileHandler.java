@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -31,10 +32,11 @@ public class FileHandler {
         out.println(result.toCSV());
     }
 
-    public ArrayList<Result> loadResults(int id){
+    public ArrayList<Result> loadResults(){
         File resultDB = new File("results.csv");
-        ArrayList<Result> results = new ArrayList();
         Scanner sc;
+        ArrayList<Result> results = new ArrayList<>();
+        Result result = null;
         try {
             sc = new Scanner(resultDB);
             sc.nextLine();
@@ -44,15 +46,12 @@ public class FileHandler {
         while (sc.hasNext()) {
             String line = sc.nextLine();
             String[] attributes = line.split(",");
-            if(Integer.parseInt(attributes[0]) == id){
-                Result result = new Result(
+
+                result = new Result(
                         Integer.parseInt(attributes[0]),
                         Double.parseDouble(attributes[6]),
                         LocalDateTime.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
-
-
                 results.add(result);
-            }
 
         }
         sc.close();
@@ -110,13 +109,12 @@ public class FileHandler {
             String line = sc.nextLine();
             String[] attributes = line.split(",");
             CompetingMember competingMember = new CompetingMember(
-                    attributes[0], // name
-                    Integer.parseInt(attributes[1]), // age
-                    Discipline.valueOf(attributes[2])); // makes string to a discipline type.
-
-
+                    attributes[1], // name
+                    Integer.parseInt(attributes[2]), // age
+                    Discipline.valueOf(attributes[3])); // makes string to a discipline type.
+            competingMember.setCompetingId(Integer.parseInt(attributes[0]));
             Membership competingMembership = new Membership(
-                    MembershipType.valueOf(attributes[3])
+                    MembershipType.valueOf(attributes[4])
             );
 
             competingMember.setMembership(competingMembership);
