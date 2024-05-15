@@ -47,7 +47,7 @@ public class Controller {
         return delfin.getCompetingMembers();
     }
 
-    public boolean addTrainingResult(int swimmerNumber, String date, double result) {
+    public boolean addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
        return delfin.addTrainingResult(swimmerNumber, date, result);
     }
 

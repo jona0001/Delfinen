@@ -103,10 +103,6 @@ public class Delfin {
         return members;
     }
 
-    public ArrayList<CompetingMember> loadCompeting(){
-        ArrayList<CompetingMember> competingMembers = fileHandler.loadCompetingMembers();
-        return competingMembers;
-    }
 
     public List<Member> getDebtors(){
         List<Member> debtors = new ArrayList<>();
@@ -155,13 +151,18 @@ public class Delfin {
         return sortCompetingMemberDiscipline;
     }
 
-    public boolean addTrainingResult(int swimmerNumber, String date, double result) {
+    public boolean addTrainingResult(int swimmerNumber, String date, double result) throws FileNotFoundException {
+
         LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        boolean isAdded = competingMembers.get(swimmerNumber).addTrainingResult(new Result(result,localDateTime));
+        Result resultToSave = new Result(competingMembers.get(swimmerNumber), swimmerNumber, result, localDateTime);
+        boolean isAdded = competingMembers.get(swimmerNumber).addTrainingResult(resultToSave);
+        fileHandler.saveTrainingResult(resultToSave);
         return isAdded;
     }
 
+
     public List<Result> getTrainingResults(int swimmerNumber) {
+        competingMembers.get(swimmerNumber).setTrainingResults(fileHandler.loadResults(swimmerNumber));
         return competingMembers.get(swimmerNumber).getTrainingResults();
     }
 }

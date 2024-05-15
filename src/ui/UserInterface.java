@@ -70,7 +70,7 @@ public class UserInterface {
 
     }
 
-    private void registerTrainingResults() {
+    private void registerTrainingResults() throws FileNotFoundException {
         getCompetingSwimmers();
         System.out.println("Enter the number of the swimmer to add their training results:");
         int swimmerNumber = scanner.nextInt();
@@ -174,14 +174,15 @@ public class UserInterface {
         if (competingMembers.isEmpty()) {
             System.out.println("No members found.");
         } else {
-            for (CompetingMember member : competingMembers) {
-                System.out.printf("Swimmer name: %s\nTeam: ", member.getName());
-                if (member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR) {
+            for (int i = 0; i < competingMembers.size(); i++) {
+                System.out.printf("%d. ", i);
+                System.out.printf("Swimmer name: %s\nTeam: ", competingMembers.get(i).getName());
+                if (competingMembers.get(i).getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR) {
                     System.out.println("Juniors");
                 } else {
                     System.out.println("Seniors");
                 }
-                System.out.printf("Discipline:%s", member.getSwimmingDiscipline() + "\n");
+                System.out.printf("Discipline:%s", competingMembers.get(i).getSwimmingDiscipline() + "\n");
                 System.out.println("===================");
             }
         }
