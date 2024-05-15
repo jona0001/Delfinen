@@ -1,7 +1,7 @@
 package domain_model;
 import data_source.FileHandler;
 import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class Delfin {
 
     //TODO:refactor this so our method arent so big and our program rely so much about on a single method/function.
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
-        Membership newMembership = new Membership(LocalDateTime.now());
+        Membership newMembership = new Membership(LocalDate.now());
         if(membership.equals("active") && age > 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
         }else if(membership.equals("passive") && age > 18){

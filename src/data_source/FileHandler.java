@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,16 +41,16 @@ public class FileHandler {
                     attributes[0], // name
                     Integer.parseInt(attributes[1]));// age);
 
-            LocalDateTime cancellationDate = null; //to check whether cancellation date in the file is "null"
+            LocalDate cancellationDate = null; //to check whether cancellation date in the file is "null"
             if (!attributes[6].equals("null")) {//if not to check it will be NullPointerException
-                cancellationDate = LocalDateTime.parse(attributes[6]);
+                cancellationDate = LocalDate.parse(attributes[6]);
             }
 
             Membership membership = new Membership(
                     Integer.parseInt(attributes[2]),
                     Integer.parseInt(attributes[3]),
                     Boolean.parseBoolean(attributes[4]),
-                    LocalDateTime.parse(attributes[5]),
+                    LocalDate.parse(attributes[5]),
                     cancellationDate,
                     MembershipType.valueOf(attributes[7])
             );
@@ -89,6 +89,5 @@ public class FileHandler {
         }
         sc.close();
         return memberFromCSVArr;
-
     }
 }

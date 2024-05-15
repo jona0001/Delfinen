@@ -1,6 +1,8 @@
 package domain_model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Membership {
@@ -9,18 +11,21 @@ public class Membership {
     private int price;
     private boolean isPaid;
     private Member member;
-    private LocalDateTime registrationDate;
-    private LocalDateTime cancellationDate;
+    private LocalDate registrationDate;
+    private LocalDate cancellationDate;
     private MembershipType membershipType;
 
     public Membership(int id, int price, boolean isPaid,
-                      LocalDateTime registrationDate, LocalDateTime cancellationDate, MembershipType membershipType) {
+                      LocalDate registrationDate, LocalDate cancellationDate, MembershipType membershipType) {
         this.id = id;
         this.price = price;
         this.isPaid = isPaid;
-        this.registrationDate = registrationDate;
+        this.registrationDate = LocalDate.parse(registrationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         this.cancellationDate = cancellationDate;
         this.membershipType = membershipType;
+
+
+
     }
     public Membership( MembershipType membershipType) {
         this.membershipType = membershipType;
@@ -31,7 +36,7 @@ public class Membership {
         this.member = member;
     }
 
-    public Membership(LocalDateTime registrationDate) {
+    public Membership(LocalDate registrationDate) {
         this.id = ThreadLocalRandom.current().nextInt(1, 999999+1);
         this.registrationDate = registrationDate;
     }
@@ -64,11 +69,11 @@ public class Membership {
         return isPaid;
     }
 
-    public LocalDateTime getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public LocalDateTime getCancellationDate() {
+    public LocalDate getCancellationDate() {
         return cancellationDate;
     }
 
@@ -76,15 +81,17 @@ public class Membership {
         return membershipType;
     }
 
+
     @Override
     public String toString() {
         return "Membership" +
                 "id=" + id +
                 ", price= " + price +
                 ", isPaid= " + isPaid +
-                ", registrationDate= " + registrationDate +
+                ", registrationDate= " + registrationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) +
                 ", cancellationDate= " + cancellationDate +
-                ", membershipType= " + membershipType;
+                ", membershipType= " + membershipType +
+                '}';
     }
 
     public String toCSV() {
@@ -93,7 +100,7 @@ public class Membership {
         csvBuilder.append(id).append(",");
         csvBuilder.append(price).append(",");
         csvBuilder.append(isPaid).append(",");
-        csvBuilder.append(registrationDate).append(",");
+        csvBuilder.append(registrationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append(",");
         csvBuilder.append(cancellationDate).append(",");
         csvBuilder.append(membershipType);
         // Remove the trailing comma and return the CSV string

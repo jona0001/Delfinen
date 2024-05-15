@@ -28,7 +28,6 @@ public class CompetingMember extends Member {
         return trainingResults;
     }
 
-
     public String toCompetingCSV() {
         // Format the movie attributes into CSV format
         StringBuilder csvBuilder = new StringBuilder();
