@@ -40,26 +40,28 @@ public class Delfin {
         Membership newMembership = new Membership(LocalDate.now());
         if(membership.equals("active") && age > 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
-        }else if(membership.equals("passive") && age > 18){
+        } else if(membership.equals("passive") && age > 18){
             newMembership.setMembershipType(MembershipType.PASSIVE_SENIOR);
-        }else if(membership.equals("active") && age < 18){
+        } else if(membership.equals("active") && age < 18){
             newMembership.setMembershipType(MembershipType.ACTIVE_JUNIOR);
-        }else{
+        } else {
             newMembership.setMembershipType(MembershipType.PASSIVE_JUNIOR);
         }
-
         Member newMember;
         if(membership.equalsIgnoreCase("active")){
             newMember = new CompetingMember(name, age, discipline);
-            //teams.get(0).addCompetingMembers((CompetingMember) newMember);
-        } else{
+        } else {
             newMember = new Member(name, age);
         }
+        // Call the addMemberToSystem method to handle the addition
+        return addMemberToSystem(newMember, newMembership);
+    }
+    private boolean addMemberToSystem(Member newMember, Membership newMembership) throws FileNotFoundException {
         newMember.setMembership(newMembership);
         newMembership.setMember(newMember);
         newMembership.setPrice();
         boolean isAdded = members.add(newMember);
-        if(newMember instanceof CompetingMember){
+        if (newMember instanceof CompetingMember) {
             competingMembers.add((CompetingMember) newMember);
             addMemberToTeam((CompetingMember) newMember);
         }
@@ -68,7 +70,7 @@ public class Delfin {
     }
 
 
-//TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
+    //TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
     public void addMemberToTeam(CompetingMember competingMember){
         if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
         competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL){
