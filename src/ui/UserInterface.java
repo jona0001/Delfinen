@@ -1,4 +1,5 @@
 package ui;
+
 import controller.Controller;
 import domain_model.*;
 import data_source.*;
@@ -31,9 +32,14 @@ public class UserInterface {
                 case 4 -> getFutureRevenue();
                 case 5 -> getCompetingSwimmers();
                 case 6 -> sortDisciplineAndType();
+                case 7 -> registerTrainingResults();
+                case 8 -> showTrainingResults();
             }
         }
     }
+
+
+
 
     private void printMembers() {
         System.out.println("All members:");
@@ -52,7 +58,8 @@ public class UserInterface {
         System.out.println("4: Show upcoming revenue for Delfinen");
         System.out.println("5: See a list of all competing members");
         System.out.println("6: Show teams");
-        System.out.println("7. Register training results for a member");
+        System.out.println("7. Register training results for a competing swimmer");
+        System.out.println("8. See the training results of a competing swimmer");
         System.out.println("9: Exit");
         System.out.println("*****************");
         try {
@@ -61,6 +68,34 @@ public class UserInterface {
             System.out.println("not working, try again");
         }
 
+    }
+
+    private void registerTrainingResults() throws FileNotFoundException {
+        getCompetingSwimmers();
+        System.out.println("Enter the number of the swimmer to add their training results:");
+        int swimmerNumber = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the date of training in the format day-month-year hours:minutes");
+        String date = scanner.nextLine();
+        System.out.println("Enter the training result:");
+        double result = scanner.nextDouble();
+        boolean isAdded = controller.addTrainingResult(swimmerNumber, date, result);
+        if(isAdded){
+            System.out.println("The result was successfully added!");
+        }else{
+            System.out.println("Something went wrong.");
+        }
+    }
+
+    private void showTrainingResults() {
+        getCompetingSwimmers();
+        System.out.println("Enter the number of the swimmer to see their training results:");
+        int swimmerNumber = scanner.nextInt();
+        scanner.nextLine();
+        List<Result> trainingResults = controller.getTrainingResults(swimmerNumber);
+        for(Result result : trainingResults){
+            System.out.println(result);
+        }
     }
 
     public void addNewMember() throws FileNotFoundException {
@@ -91,7 +126,7 @@ public class UserInterface {
 
 
         Discipline discipline = null;
-        if (membershipType.equalsIgnoreCase("Active")){
+        if (membershipType.equalsIgnoreCase("Active")) {
             System.out.println("Enter Discipline, choose one:");
             System.out.println("1. Butterfly");
             System.out.println("2. Crawl");
@@ -99,7 +134,7 @@ public class UserInterface {
             System.out.println("4. Back Crawl");
             int disciplineInput = scanner.nextInt();
 
-            switch (disciplineInput){
+            switch (disciplineInput) {
                 case 1 -> discipline = Discipline.BUTTERFLY;
                 case 2 -> discipline = Discipline.CRAWL;
                 case 3 -> discipline = Discipline.BREAST_STROKE;
@@ -107,13 +142,13 @@ public class UserInterface {
             }
         }
         boolean isAdded = controller.addMember(name, age, membershipType, discipline);
-        if(isAdded){
+        if (isAdded) {
             System.out.println("The new member was added.");
         }
     }
 
 
-    public void getDebtors(){
+    public void getDebtors() {
         System.out.println("Debtors:");
         for (int i = 0; i < controller.getDebtors().size(); i++) {
             System.out.printf("%d. ", i);
@@ -122,38 +157,39 @@ public class UserInterface {
         }
     }
 
-    public void getFutureRevenue(){
+    public void getFutureRevenue() {
         int upcomingRevenue = controller.getUpcomingRevenue();
         System.out.println("The swimming club is expected to get: " + upcomingRevenue + "kr.");
         System.out.println("The subscriptions which are expected to be cancelled are not counted.");
     }
 
-    public void getCompetingSwimmers(){
+    public void getCompetingSwimmers() {
         List<CompetingMember> competingMembers = controller.getCompetingSwimmers();
         System.out.println("Competing members:");
-       printCompetingMembers(competingMembers);
+        printCompetingMembers(competingMembers);
     }
 
-    public void printCompetingMembers(List<CompetingMember> competingMembers){
+    public void printCompetingMembers(List<CompetingMember> competingMembers) {
         System.out.println();
-        if(competingMembers.isEmpty()){
+        if (competingMembers.isEmpty()) {
             System.out.println("No members found.");
-        } else{
-            for(CompetingMember member : competingMembers){
-                System.out.printf("Swimmer name: %s\nTeam: ", member.getName());
-                if(member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR){
+        } else {
+            for (int i = 0; i < competingMembers.size(); i++) {
+                System.out.printf("%d. ", i);
+                System.out.printf("Swimmer name: %s\nTeam: ", competingMembers.get(i).getName());
+                if (competingMembers.get(i).getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR) {
                     System.out.println("Juniors");
-                }else{
+                } else {
                     System.out.println("Seniors");
                 }
-                System.out.printf("Discipline:%s", member.getSwimmingDiscipline() + "\n");
+                System.out.printf("Discipline:%s", competingMembers.get(i).getSwimmingDiscipline() + "\n");
                 System.out.println("===================");
             }
         }
     }
 
 
-    public void sortDisciplineAndType(){
+    public void sortDisciplineAndType() {
         MembershipType membershipType = null;
         System.out.println("Choose category: \n1. Seniors\n2. Juniors");
         int membershipInput = scanner.nextInt();
@@ -169,13 +205,13 @@ public class UserInterface {
         System.out.println("4. Back Crawl team");
         int disciplineInput = scanner.nextInt();
         Discipline discipline = null;
-        switch (disciplineInput){
+        switch (disciplineInput) {
             case 1 -> discipline = Discipline.BUTTERFLY;
             case 2 -> discipline = Discipline.CRAWL;
             case 3 -> discipline = Discipline.BREAST_STROKE;
             case 4 -> discipline = Discipline.BACK_CRAWL;
         }
-        List<CompetingMember> sortedList = controller.sortMembers(membershipType,discipline);
+        List<CompetingMember> sortedList = controller.sortMembers(membershipType, discipline);
         printCompetingMembers(sortedList);
     }
 

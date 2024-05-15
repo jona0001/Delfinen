@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,6 +24,39 @@ public class FileHandler {
             CompetingMember competingMember = (CompetingMember) member;
             competing.println(competingMember.toCompetingCSV());
         }
+    }
+
+    public void saveTrainingResult(Result result) throws FileNotFoundException {
+        PrintStream out = new PrintStream(new FileOutputStream(("results.csv"), true));
+        out.println(result.toCSV());
+    }
+
+    public ArrayList<Result> loadResults(int id){
+        File resultDB = new File("results.csv");
+        ArrayList<Result> results = new ArrayList();
+        Scanner sc;
+        try {
+            sc = new Scanner(resultDB);
+            sc.nextLine();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] attributes = line.split(",");
+            if(Integer.parseInt(attributes[0]) == id){
+                Result result = new Result(
+                        Integer.parseInt(attributes[0]),
+                        Double.parseDouble(attributes[6]),
+                        LocalDateTime.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
+
+                results.add(result);
+            }
+
+        }
+        sc.close();
+        return results;
     }
 
     public ArrayList<Member> loadMembers() {

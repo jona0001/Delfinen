@@ -20,12 +20,16 @@ public class CompetingMember extends Member {
         this.swimmingDiscipline = swimmingDiscipline;
     }
 
-    public void addTrainingResult(Result trainingResult) {
-        trainingResults.add(trainingResult);
+    public boolean addTrainingResult(Result trainingResult) {
+        return trainingResults.add(trainingResult);
     }
 
     public ArrayList<Result> getTrainingResults(){
         return trainingResults;
+    }
+
+    public void setTrainingResults(ArrayList<Result> trainingResults) {
+        this.trainingResults = trainingResults;
     }
 
     public String toCompetingCSV() {
