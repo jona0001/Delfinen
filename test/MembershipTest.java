@@ -9,14 +9,40 @@ import static org.junit.jupiter.api.Assertions.*;
 class MembershipTest {
 
     @Test
-    void setPrice() {
-        //setup
-        Membership membership = new Membership(2,1000,true,null,null,MembershipType.ACTIVE_SENIOR);
-        Member member = new Member("test",22);
+    void setPricePassiveSenior() {
+        Membership membership = new Membership(MembershipType.PASSIVE_SENIOR);
+        membership.setPrice();
+        assertEquals(500, membership.getPrice());
+    }
 
-        int expectedResult = 1000;
-        int actualResult = membership.getPrice();
-        // assert
-        assertEquals(expectedResult, actualResult);
+    @Test
+    void setPricePassiveJunior(){
+        Membership membership = new Membership(MembershipType.PASSIVE_JUNIOR);
+        membership.setPrice();
+        assertEquals(500,membership.getPrice());
+    }
+
+    @Test
+    void setPriceActiveJunior(){
+        Membership membership = new Membership(MembershipType.ACTIVE_JUNIOR);
+        membership.setPrice();
+        assertEquals(1000,membership.getPrice());
+    }
+    @Test
+    void setPriceActiveSeniorDiscount(){
+        Membership membership = new Membership(MembershipType.ACTIVE_SENIOR);
+        Member member = new Member("TestMember", 25);
+        if (membership.getMembershipType().equals(MembershipType.ACTIVE_SENIOR) && member.getAge() > 60) {
+            membership.setPrice();
+            assertEquals(1200, membership.getPrice());
+        }
+    }
+    @Test
+    void setPriceActiveSenior(){
+        Membership membership = new Membership(MembershipType.ACTIVE_SENIOR);
+        membership.setPrice();
+        assertEquals(1600,membership.getPrice());
     }
 }
+
+
