@@ -1,12 +1,13 @@
 package domain_model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Result {
     private double result;
     private LocalDateTime date;
 
-    public Result(int result, LocalDateTime date) {
+    public Result(double result, LocalDateTime date) {
         this.result = result;
         this.date = date;
     }
@@ -21,9 +22,8 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "result=" + result +
-                ", date=" + date +
-                '}';
+        return
+                "Result: " + result +
+                "\nDate: " + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 }

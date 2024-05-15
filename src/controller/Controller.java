@@ -47,6 +47,14 @@ public class Controller {
         return delfin.getCompetingMembers();
     }
 
+    public boolean addTrainingResult(int swimmerNumber, String date, double result) {
+       return delfin.addTrainingResult(swimmerNumber, date, result);
+    }
+
+    public List<Result> getTrainingResults(int swimmerNumber) {
+        return delfin.getTrainingResults(swimmerNumber);
+    }
+
 
     /*
     public List <Member>getCompetingSwimmers(){

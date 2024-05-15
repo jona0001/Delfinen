@@ -20,8 +20,8 @@ public class CompetingMember extends Member {
         this.swimmingDiscipline = swimmingDiscipline;
     }
 
-    public void addTrainingResult(Result trainingResult) {
-        trainingResults.add(trainingResult);
+    public boolean addTrainingResult(Result trainingResult) {
+        return trainingResults.add(trainingResult);
     }
 
     public ArrayList<Result> getTrainingResults(){

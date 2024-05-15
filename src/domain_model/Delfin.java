@@ -2,6 +2,8 @@ package domain_model;
 import data_source.FileHandler;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,6 +153,16 @@ public class Delfin {
             }
         }
         return sortCompetingMemberDiscipline;
+    }
+
+    public boolean addTrainingResult(int swimmerNumber, String date, double result) {
+        LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        boolean isAdded = competingMembers.get(swimmerNumber).addTrainingResult(new Result(result,localDateTime));
+        return isAdded;
+    }
+
+    public List<Result> getTrainingResults(int swimmerNumber) {
+        return competingMembers.get(swimmerNumber).getTrainingResults();
     }
 }
 
