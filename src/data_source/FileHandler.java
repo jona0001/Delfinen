@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,7 +51,7 @@ public class FileHandler {
                     Integer.parseInt(attributes[2]),
                     Integer.parseInt(attributes[3]),
                     Boolean.parseBoolean(attributes[4]),
-                    LocalDate.parse(attributes[5]),
+                    LocalDate.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy")),
                     cancellationDate,
                     MembershipType.valueOf(attributes[7])
             );

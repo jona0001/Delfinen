@@ -20,7 +20,7 @@ public class Membership {
         this.id = id;
         this.price = price;
         this.isPaid = isPaid;
-        this.registrationDate = LocalDate.parse(registrationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        this.registrationDate = registrationDate;
         this.cancellationDate = cancellationDate;
         this.membershipType = membershipType;
 
