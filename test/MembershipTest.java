@@ -30,16 +30,17 @@ class MembershipTest {
     }
     @Test
     void setPriceActiveSeniorDiscount(){
+        Member member = new Member("TestMember", 62);
         Membership membership = new Membership(MembershipType.ACTIVE_SENIOR);
-        Member member = new Member("TestMember", 25);
-        if (membership.getMembershipType().equals(MembershipType.ACTIVE_SENIOR) && member.getAge() > 60) {
-            membership.setPrice();
-            assertEquals(1200, membership.getPrice());
-        }
+        membership.setMember(member);
+        membership.setPrice();
+        assertEquals(1200, membership.getPrice());
     }
     @Test
     void setPriceActiveSenior(){
+        Member member = new Member("Testmember", 55);
         Membership membership = new Membership(MembershipType.ACTIVE_SENIOR);
+        membership.setMember(member);
         membership.setPrice();
         assertEquals(1600,membership.getPrice());
     }

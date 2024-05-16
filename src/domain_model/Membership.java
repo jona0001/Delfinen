@@ -48,10 +48,10 @@ public class Membership {
     public void setPrice() {
         if (membershipType == MembershipType.ACTIVE_JUNIOR) {
             price = 1000;
+        } else if (membershipType == MembershipType.ACTIVE_SENIOR && member.getAge() > 60) {
+            price = 1200;
         } else if (membershipType == MembershipType.ACTIVE_SENIOR) {
             price = 1600;
-        } else if (membershipType == MembershipType.ACTIVE_SENIOR && (member.getAge() > 60)) {
-            price = 1600 - (1600 / 100 * 25);
         } else if (membershipType == MembershipType.PASSIVE_JUNIOR || membershipType == MembershipType.PASSIVE_SENIOR) {
             price = 500;
         }
