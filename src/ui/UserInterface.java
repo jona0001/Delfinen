@@ -4,6 +4,7 @@ import controller.Controller;
 import domain_model.*;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.List;
 
@@ -82,12 +83,21 @@ public class UserInterface {
         int swimmerNumber = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Enter the date of training in the format day-month-year hours:minutes");
-        String date = scanner.nextLine();
-        System.out.println("Enter the training result:");
-        double result = scanner.nextDouble();
-        controller.addTrainingResult(swimmerNumber, date, result);
-        System.out.println("The result was successfully added!");
-
+        boolean isDoneWithDate = false;
+        String date = "";
+        while(!isDoneWithDate){
+            try{
+                date = scanner.nextLine();
+                System.out.println("Enter the training result:");
+                double result = scanner.nextDouble();
+                controller.addTrainingResult(swimmerNumber, date, result);
+                System.out.println("The result was successfully added!");
+                isDoneWithDate = true;
+            }catch (DateTimeParseException ex){
+                System.out.println("You entered the date in the wrong format.\nPlease enter the date in the format day-month-year hours:minutes");
+                scanner.nextLine();
+            }
+        }
     }
 
     private void showTrainingResults() {
