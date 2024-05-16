@@ -14,6 +14,7 @@ public class Delfin {
     private ArrayList<Member> members;
     private ArrayList<Result> results;
     private ArrayList<Team> teams = new ArrayList<>();
+    private ArrayList<Competition>competitions;
 
     Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
     Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
@@ -42,6 +43,19 @@ public class Delfin {
 
         }
     }
+    /*
+    public void pairMembersAndCompetitionResults(){
+        for(CompetingMember competingMember : competingMembers){
+            for(Competition competition: competitions){
+                if(competingMember.getCompetingId() == competition.getCompetingMember().getCompetingId()){
+
+                }
+            }
+
+        }
+    }
+
+     */
 
     public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
         this.competingMembers = competingMembers;
@@ -135,37 +149,6 @@ public class Delfin {
         }
     }
 
-    /*
-    public void addMemberToTeam(CompetingMember competingMember){
-
-        if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
-        competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL){
-            juniorBackCrawlTeam.addCompetingMembers(competingMember);
-        }else if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.CRAWL){
-            juniorCrawlTeam.addCompetingMembers(competingMember);
-        }else if(competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY){
-            juniorButterflyTeam.addCompetingMembers(competingMember);
-        } else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE){
-            juniorBreastStrokeTeam.addCompetingMembers(competingMember);
-        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.BACK_CRAWL) {
-            seniorBackCrawlTeam.addCompetingMembers(competingMember);
-        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.BREAST_STROKE) {
-            seniorBreastStrokeTeam.addCompetingMembers(competingMember);
-        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.BUTTERFLY) {
-            seniorButterflyTeam.addCompetingMembers(competingMember);
-        }else if (competingMember.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR &&
-                competingMember.getSwimmingDiscipline() == Discipline.CRAWL) {
-            seniorCrawlTeam.addCompetingMembers(competingMember);
-        }
-    }
-
-     */
 
     public ArrayList<Member> getAllMembers(){
         return members;
@@ -248,7 +231,6 @@ public class Delfin {
 
     }
 
-
     public Result getTrainingResults(int swimmerNumber) {
         for(Result result : results){
             if(result.getCompetingMemberId() == swimmerNumber){
@@ -262,6 +244,10 @@ public class Delfin {
         CompetingMember competingMember1 = competingMembers.get(Integer.parseInt(competingMember));
         Competition competitionToSave = new Competition(competingMember1, venue,ranking,time);
          fileHandler.saveCompetingResult(competitionToSave);
+    }
+
+    public void setCompetitions(ArrayList<Competition> competitions) {
+        this.competitions = competitions;
     }
 }
 

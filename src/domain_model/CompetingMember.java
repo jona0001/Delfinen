@@ -31,6 +31,8 @@ public class CompetingMember extends Member {
         this.trainingResult = trainingResult;
     }
 
+
+
     public String toCompetingCSV() {
         // Format the movie attributes into CSV format
         StringBuilder csvBuilder = new StringBuilder();
@@ -51,4 +53,7 @@ public class CompetingMember extends Member {
                 ", competingId=" + competingId +
                 '}';
     }
+
+
+
 }

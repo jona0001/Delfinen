@@ -24,7 +24,19 @@ public class Competition {
         return csvBuilder.toString();
     }
 
+    public CompetingMember getCompetingMember() {
+        return competingMember;
+    }
 
+    public String getVenue() {
+        return venue;
+    }
 
+    public int getRanking() {
+        return ranking;
+    }
 
+    public double getTime() {
+        return time;
+    }
 }

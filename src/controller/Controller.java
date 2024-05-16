@@ -17,6 +17,7 @@ public class Controller {
         delfin.setCompetingMembers(fileHandler.loadCompetingMembers());
         delfin.setResults(fileHandler.loadResults());
         delfin.pairMembersAndResults();
+        delfin.setCompetitions(fileHandler.loadCompetitionResults());
     }
 
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
@@ -37,6 +38,7 @@ public class Controller {
     public void loadFromFile(){
         fileHandler.loadCompetingMembers();
         fileHandler.loadMembers();
+        fileHandler.loadCompetitionResults();
     }
 
     public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
@@ -66,10 +68,8 @@ public class Controller {
          delfin.addCompetionEvent(competingMember,venue,ranking,time);
     }
 
-    /*
-    public List <Member>getCompetingSwimmers(){
-        return delfin.getCompetingSwimmers();
-    }
 
-     */
+
+
+
 }

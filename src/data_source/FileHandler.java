@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -20,8 +19,7 @@ public class FileHandler {
         PrintStream competing = new PrintStream(new FileOutputStream(("CompetingMembers.csv"), true));
         out.println(member.toCSV());
 
-        if (member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR ||
-                member.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR) {
+        if (member.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR || member.getMembership().getMembershipType() == MembershipType.ACTIVE_SENIOR) {
             CompetingMember competingMember = (CompetingMember) member;
             competing.println(competingMember.toCompetingCSV());
         }
@@ -37,7 +35,7 @@ public class FileHandler {
         out.println(competition.toCSV());
     }
 
-    public ArrayList<Result> loadResults(){
+    public ArrayList<Result> loadResults() {
         File resultDB = new File("results.csv");
         Scanner sc;
         ArrayList<Result> results = new ArrayList<>();
@@ -52,11 +50,8 @@ public class FileHandler {
             String line = sc.nextLine();
             String[] attributes = line.split(",");
 
-                result = new Result(
-                        Integer.parseInt(attributes[0]),
-                        Double.parseDouble(attributes[6]),
-                        LocalDateTime.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
-                results.add(result);
+            result = new Result(Integer.parseInt(attributes[0]), Double.parseDouble(attributes[6]), LocalDateTime.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+            results.add(result);
 
         }
         sc.close();
@@ -76,8 +71,7 @@ public class FileHandler {
         while (sc.hasNext()) {
             String line = sc.nextLine();
             String[] attributes = line.split(",");
-            Member member = new Member(
-                    attributes[0], // name
+            Member member = new Member(attributes[0], // name
                     Integer.parseInt(attributes[1]));// age);
 
             LocalDate cancellationDate = null; //to check whether cancellation date in the file is "null"
@@ -85,14 +79,7 @@ public class FileHandler {
                 cancellationDate = LocalDate.parse(attributes[6]);
             }
 
-            Membership membership = new Membership(
-                    Integer.parseInt(attributes[2]),
-                    Integer.parseInt(attributes[3]),
-                    Boolean.parseBoolean(attributes[4]),
-                    LocalDate.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                    cancellationDate,
-                    MembershipType.valueOf(attributes[7])
-            );
+            Membership membership = new Membership(Integer.parseInt(attributes[2]), Integer.parseInt(attributes[3]), Boolean.parseBoolean(attributes[4]), LocalDate.parse(attributes[5], DateTimeFormatter.ofPattern("dd-MM-yyyy")), cancellationDate, MembershipType.valueOf(attributes[7]));
             member.setMembership(membership);
             memberFromCSVArr.add(member);
         }
@@ -113,14 +100,11 @@ public class FileHandler {
         while (sc.hasNext()) {
             String line = sc.nextLine();
             String[] attributes = line.split(",");
-            CompetingMember competingMember = new CompetingMember(
-                    attributes[1], // name
+            CompetingMember competingMember = new CompetingMember(attributes[1], // name
                     Integer.parseInt(attributes[2]), // age
                     Discipline.valueOf(attributes[3])); // makes string to a discipline type.
             competingMember.setCompetingId(Integer.parseInt(attributes[0]));
-            Membership competingMembership = new Membership(
-                    MembershipType.valueOf(attributes[4])
-            );
+            Membership competingMembership = new Membership(MembershipType.valueOf(attributes[4]));
 
             competingMember.setMembership(competingMembership);
             memberFromCSVArr.add(competingMember);
@@ -128,4 +112,35 @@ public class FileHandler {
         sc.close();
         return memberFromCSVArr;
     }
+
+    public ArrayList<Competition> loadCompetitionResults() {
+        File resultDB = new File("CompetingResults.csv");
+        Scanner sc;
+        ArrayList<Competition> competitionResult = new ArrayList<>();
+        Competition competitionResults = null;
+        try {
+            sc = new Scanner(resultDB);
+            sc.nextLine();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] attributes = line.split(",");
+            CompetingMember competingMember = new CompetingMember(attributes[1], Integer.parseInt(attributes[2]), Discipline.valueOf(attributes[3]));
+
+            competitionResults = new Competition(competingMember,
+                    attributes[5], Integer.parseInt(attributes[6]), Double.parseDouble(attributes[7]));
+            Membership competingMembership = new Membership(MembershipType.valueOf(attributes[4]));
+
+
+            competingMember.setMembership(competingMembership);
+
+
+        }
+        sc.close();
+        competitionResult.add(competitionResults);
+        return competitionResult;
+    }
+
 }
