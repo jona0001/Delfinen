@@ -62,6 +62,10 @@ public class Controller {
     }
 
 
+    public void setCompetitionEvent(String competingMember, String venue, int ranking, double time ) throws FileNotFoundException {
+         delfin.addCompetionEvent(competingMember,venue,ranking,time);
+    }
+
     /*
     public List <Member>getCompetingSwimmers(){
         return delfin.getCompetingSwimmers();

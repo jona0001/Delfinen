@@ -32,6 +32,11 @@ public class FileHandler {
         out.println(result.toCSV());
     }
 
+    public void saveCompetingResult(Competition competition) throws FileNotFoundException {
+        PrintStream out = new PrintStream(new FileOutputStream(("competingResults.csv"), true));
+        out.println(competition.toCSV());
+    }
+
     public ArrayList<Result> loadResults(){
         File resultDB = new File("results.csv");
         Scanner sc;

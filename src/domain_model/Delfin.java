@@ -257,6 +257,12 @@ public class Delfin {
         }
         return null;
     }
+
+    public void addCompetionEvent(String competingMember, String venue, int ranking, double time) throws FileNotFoundException {
+        CompetingMember competingMember1 = competingMembers.get(Integer.parseInt(competingMember));
+        Competition competitionToSave = new Competition(competingMember1, venue,ranking,time);
+         fileHandler.saveCompetingResult(competitionToSave);
+    }
 }
 
 

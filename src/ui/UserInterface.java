@@ -19,7 +19,7 @@ public class UserInterface {
 
     public void start() throws FileNotFoundException {
         controller.loadFromFile();
-        int sentinel = 10;
+        int sentinel = 11;
         while (menuChoice != sentinel) {
             myMenuText();
             switch (menuChoice) {
@@ -32,6 +32,7 @@ public class UserInterface {
                 case 7 -> registerTrainingResults();
                 case 8 -> showTrainingResults();
                 case 9 -> showTopSwimmers();
+                case 10 -> registerCompetitionResults();
             }
         }
     }
@@ -66,7 +67,8 @@ public class UserInterface {
         System.out.println("7. Register training results for a competing swimmer");
         System.out.println("8. See the training results of a competing swimmer");
         System.out.println("9. See top swimmers");
-        System.out.println("10: Exit");
+        System.out.println("10. Register competion details");
+        System.out.println("11: Exit");
         System.out.println("*****************");
         try {
             menuChoice = scanner.nextInt();
@@ -224,6 +226,27 @@ public class UserInterface {
             List<CompetingMember> team = controller.sortMembers(entry.getKey(), entry.getValue());
             printCompetingMembers(team);
         }
+
+    }
+
+    public void registerCompetitionResults() throws FileNotFoundException {
+        getCompetingSwimmers();
+        String competingMember = scanner.next();
+
+        System.out.println("Enter event name for the competition");
+        String eventInput = scanner.next();
+
+        System.out.println("Enter location for the competition");
+        String locationInput = scanner.next();
+
+        System.out.println("Enter ranking of the competition");
+        int rankInput = scanner.nextInt();
+
+        System.out.println("Enter swimming time for member");
+        double timeInput = scanner.nextDouble();
+
+        controller.setCompetitionEvent(competingMember,eventInput, rankInput, timeInput);
+
 
     }
 
