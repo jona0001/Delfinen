@@ -69,7 +69,7 @@ public class UserInterface {
         System.out.println("7. Register training results for a competing swimmer");
         System.out.println("8. See the training results of a competing swimmer");
         System.out.println("9. See top swimmers");
-        System.out.println("10. Register competion details");
+        System.out.println("10. Register competition details");
         System.out.println("11. Print competition results");
         System.out.println("15: Exit");
         System.out.println("*****************");
@@ -192,13 +192,7 @@ public class UserInterface {
         } else {
             for (int i = 0; i < competingMembers.size(); i++) {
                 System.out.printf("%d. ", i);
-                System.out.printf("Swimmer name: %s\nTeam: ", competingMembers.get(i).getName());
-                if (competingMembers.get(i).getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR) {
-                    System.out.println("Juniors");
-                } else {
-                    System.out.println("Seniors");
-                }
-                System.out.printf("Discipline:%s", competingMembers.get(i).getSwimmingDiscipline() + "\n");
+                System.out.println(competingMembers.get(i));
                 System.out.println("===================");
             }
         }

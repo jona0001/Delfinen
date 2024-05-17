@@ -26,10 +26,6 @@ public class Result {
         return result;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
     public int getCompetingMemberId() {
         return competingMemberId;
     }
@@ -37,7 +33,7 @@ public class Result {
     @Override
     public String toString() {
         return
-                "Result: " + result + "\nid:" + competingMemberId +
+                "Result: " + result +
                 "\nDate: " + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 

@@ -52,9 +52,13 @@ public class CompetingMember extends Member {
 
     @Override
     public String toString() {
-        return
-                super.getName() + "\n" +
-                "Swimming Discipline: " + swimmingDiscipline + "\n" +
-                "Competing Id: " + competingId;
+        String competingMemberString =  "Swimmer name: " + super.getName() + "\nTeam: ";
+        if (super.getMembership().getMembershipType() == MembershipType.ACTIVE_JUNIOR) {
+          competingMemberString += "Juniors\n";
+        } else {
+           competingMemberString += "Seniors\n";
+        }
+        competingMemberString+="Discipline: " + swimmingDiscipline;
+        return competingMemberString;
     }
 }

@@ -4,7 +4,6 @@ import data_source.FileHandler;
 import domain_model.*;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,20 +24,19 @@ public class Controller {
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
         return delfin.addMember(name, age, membership, discipline);
     }
-
     public ArrayList<Member> getAllMembers() {
         return delfin.getAllMembers();
     }
 
-    public List<Member> getDebtors() {
+    public List<Member> getDebtors(){
         return delfin.getDebtors();
     }
 
-    public int getUpcomingRevenue() {
+    public int getUpcomingRevenue(){
         return delfin.getUpcomingRevenue();
     }
 
-    public void loadFromFile() {
+    public void loadFromFile(){
         fileHandler.loadCompetingMembers();
         fileHandler.loadMembers();
         fileHandler.loadCompetitionResults();
@@ -47,6 +45,7 @@ public class Controller {
     public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
         return delfin.getMembersByAgeAndDiscipline(membershipType, discipline);
     }
+
 
 
     public ArrayList<CompetingMember> getCompetingSwimmers() {

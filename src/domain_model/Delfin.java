@@ -54,7 +54,6 @@ public class Delfin {
     }
 
 
-
     public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
         this.competingMembers = competingMembers;
     }
@@ -107,8 +106,6 @@ public class Delfin {
 
     //TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
 
-
-
     public void addMemberToTeam(CompetingMember competingMember) {
         MembershipType membershipType = competingMember.getMembership().getMembershipType();
         Discipline swimmingDiscipline = competingMember.getSwimmingDiscipline();
@@ -141,7 +138,6 @@ public class Delfin {
                             seniorCrawlTeam.addCompetingMembers(competingMember);
                     default -> {
                         System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
-
                     }
                 }
         }
@@ -251,6 +247,7 @@ public class Delfin {
     public void setCompetitions(ArrayList<Competition> competitions) {
         this.competitions = competitions;
     }
+
 }
 
 

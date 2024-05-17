@@ -31,10 +31,10 @@ public class Competition {
     }
     @Override
     public String toString() {
-        return "Competing member: " + competingMember + "\n"+
+        return competingMember + "\n"+
                 "Venue: " + venue + "\n" +
                 "Ranking: " + ranking + "\n"+
-                "Time: " + time;
+                "Time: " + time + "\n";
     }
 
     public String getVenue() {

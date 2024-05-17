@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Membership {
-    //private static int IDs = 0;
     private int id;
     private int price;
     private boolean isPaid = true;
