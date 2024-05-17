@@ -6,6 +6,8 @@ public class CompetingMember extends Member {
     private Result trainingResult;
     private int competingId;
 
+    private Competition competitionResult;
+
     public CompetingMember(String name, int age, Discipline swimmingDiscipline) {
         super(name, age);
         this.swimmingDiscipline = swimmingDiscipline;
@@ -31,6 +33,9 @@ public class CompetingMember extends Member {
         this.trainingResult = trainingResult;
     }
 
+    public void setCompetitionResult(Competition competition) {
+        this.competitionResult = competitionResult;
+    }
 
 
     public String toCompetingCSV() {

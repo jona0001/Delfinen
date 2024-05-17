@@ -20,7 +20,7 @@ public class UserInterface {
 
     public void start() throws FileNotFoundException {
         controller.loadFromFile();
-        int sentinel = 11;
+        int sentinel = 15;
         while (menuChoice != sentinel) {
             myMenuText();
             switch (menuChoice) {
@@ -34,6 +34,7 @@ public class UserInterface {
                 case 8 -> showTrainingResults();
                 case 9 -> showTopSwimmers();
                 case 10 -> registerCompetitionResults();
+                case 11 -> printCompetitionResults();
             }
         }
     }
@@ -69,7 +70,8 @@ public class UserInterface {
         System.out.println("8. See the training results of a competing swimmer");
         System.out.println("9. See top swimmers");
         System.out.println("10. Register competion details");
-        System.out.println("11: Exit");
+        System.out.println("11. Print competition results");
+        System.out.println("15: Exit");
         System.out.println("*****************");
         try {
             menuChoice = scanner.nextInt();
@@ -257,6 +259,11 @@ public class UserInterface {
 
         controller.setCompetitionEvent(competingMember,eventInput, rankInput, timeInput);
 
+
+    }
+
+
+    public void printCompetitionResults(){
 
     }
 

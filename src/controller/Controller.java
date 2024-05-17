@@ -16,8 +16,9 @@ public class Controller {
         this.delfin = new Delfin(fileHandler.loadMembers());
         delfin.setCompetingMembers(fileHandler.loadCompetingMembers());
         delfin.setResults(fileHandler.loadResults());
-        delfin.pairMembersAndResults();
         delfin.setCompetitions(fileHandler.loadCompetitionResults());
+        delfin.pairMembersAndResults();
+        delfin.pairMembersAndCompetitionResults();
     }
 
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {

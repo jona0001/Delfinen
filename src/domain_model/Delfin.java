@@ -40,22 +40,20 @@ public class Delfin {
                     competingMember.setTrainingResult(result);
                 }
             }
-
         }
     }
-    /*
+
     public void pairMembersAndCompetitionResults(){
         for(CompetingMember competingMember : competingMembers){
             for(Competition competition: competitions){
                 if(competingMember.getCompetingId() == competition.getCompetingMember().getCompetingId()){
-
+                    competingMember.setCompetitionResult(competition);
                 }
             }
-
         }
     }
 
-     */
+
 
     public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
         this.competingMembers = competingMembers;
