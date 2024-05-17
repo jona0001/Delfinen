@@ -1,5 +1,7 @@
 package domain_model;
 
+import java.util.ArrayList;
+
 public class Competition {
     private CompetingMember competingMember;
     private String venue;
@@ -26,6 +28,13 @@ public class Competition {
 
     public CompetingMember getCompetingMember() {
         return competingMember;
+    }
+    @Override
+    public String toString() {
+        return "Competing member: " + competingMember + "\n"+
+                "Venue: " + venue + "\n" +
+                "Ranking: " + ranking + "\n"+
+                "Time: " + time;
     }
 
     public String getVenue() {

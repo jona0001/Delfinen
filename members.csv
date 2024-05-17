@@ -1,7 +1,4 @@
 Name,Age,Membership ID,Price,Paid,Date,Cancel date,Type
-Jonathan,20,898413,1600,false,15-05-2024,null,ACTIVE_SENIOR,
-bgffresb,34,558351,1600,false,15-05-2024,null,ACTIVE_SENIOR,
-Jack,15,497656,1000,false,15-05-2024,null,ACTIVE_JUNIOR,
 Lars,25,490558,1600,false,15-05-2024,null,ACTIVE_SENIOR,
 Henrik,22,69116,1600,false,15-05-2024,null,ACTIVE_SENIOR,
 Jonathan,23,252645,1600,false,15-05-2024,null,ACTIVE_SENIOR,

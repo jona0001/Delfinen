@@ -14,7 +14,7 @@ public class Delfin {
     private ArrayList<Member> members;
     private ArrayList<Result> results;
     private ArrayList<Team> teams = new ArrayList<>();
-    private ArrayList<Competition>competitions;
+    private ArrayList<Competition> competitions;
 
     Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
     Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
@@ -33,20 +33,20 @@ public class Delfin {
         this.members = members;
     }
 
-    public void pairMembersAndResults(){
-        for(CompetingMember competingMember : competingMembers){
-            for(Result result : results){
-                if(competingMember.getCompetingId() == result.getCompetingMemberId()){
+    public void pairMembersAndResults() {
+        for (CompetingMember competingMember : competingMembers) {
+            for (Result result : results) {
+                if (competingMember.getCompetingId() == result.getCompetingMemberId()) {
                     competingMember.setTrainingResult(result);
                 }
             }
         }
     }
 
-    public void pairMembersAndCompetitionResults(){
-        for(CompetingMember competingMember : competingMembers){
-            for(Competition competition: competitions){
-                if(competingMember.getCompetingId() == competition.getCompetingMember().getCompetingId()){
+    public void pairMembersAndCompetitionResults() {
+        for (CompetingMember competingMember : competingMembers) {
+            for (Competition competition : competitions) {
+                if (competingMember.getCompetingId() == competition.getCompetingMember().getCompetingId()) {
                     competingMember.setCompetitionResult(competition);
                 }
             }
@@ -242,6 +242,10 @@ public class Delfin {
         CompetingMember competingMember1 = competingMembers.get(Integer.parseInt(competingMember));
         Competition competitionToSave = new Competition(competingMember1, venue,ranking,time);
          fileHandler.saveCompetingResult(competitionToSave);
+    }
+
+    public ArrayList<Competition> getCompetitions() {
+        return competitions;
     }
 
     public void setCompetitions(ArrayList<Competition> competitions) {

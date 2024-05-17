@@ -264,7 +264,8 @@ public class UserInterface {
 
 
     public void printCompetitionResults(){
-
+        for(Competition competition : controller.showCompetition()) {
+            System.out.println(competition);
+        }
     }
-
 }

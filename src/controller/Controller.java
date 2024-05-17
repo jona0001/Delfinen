@@ -4,6 +4,7 @@ import data_source.FileHandler;
 import domain_model.*;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +25,20 @@ public class Controller {
     public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
         return delfin.addMember(name, age, membership, discipline);
     }
+
     public ArrayList<Member> getAllMembers() {
         return delfin.getAllMembers();
     }
 
-    public List<Member> getDebtors(){
+    public List<Member> getDebtors() {
         return delfin.getDebtors();
     }
 
-    public int getUpcomingRevenue(){
+    public int getUpcomingRevenue() {
         return delfin.getUpcomingRevenue();
     }
 
-    public void loadFromFile(){
+    public void loadFromFile() {
         fileHandler.loadCompetingMembers();
         fileHandler.loadMembers();
         fileHandler.loadCompetitionResults();
@@ -45,7 +47,6 @@ public class Controller {
     public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
         return delfin.getMembersByAgeAndDiscipline(membershipType, discipline);
     }
-
 
 
     public ArrayList<CompetingMember> getCompetingSwimmers() {
@@ -65,12 +66,11 @@ public class Controller {
     }
 
 
-    public void setCompetitionEvent(String competingMember, String venue, int ranking, double time ) throws FileNotFoundException {
-         delfin.addCompetionEvent(competingMember,venue,ranking,time);
+    public void setCompetitionEvent(String competingMember, String venue, int ranking, double time) throws FileNotFoundException {
+        delfin.addCompetionEvent(competingMember, venue, ranking, time);
     }
 
-
-
-
-
+    public ArrayList<Competition> showCompetition() {
+        return delfin.getCompetitions();
+    }
 }

@@ -135,11 +135,11 @@ public class FileHandler {
 
 
             competingMember.setMembership(competingMembership);
+            competitionResult.add(competitionResults);
 
 
         }
         sc.close();
-        competitionResult.add(competitionResults);
         return competitionResult;
     }
 

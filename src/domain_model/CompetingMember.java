@@ -52,13 +52,9 @@ public class CompetingMember extends Member {
 
     @Override
     public String toString() {
-        return "CompetingMember{" +
-                "swimmingDiscipline=" + swimmingDiscipline +
-                ", trainingResult=" + trainingResult +
-                ", competingId=" + competingId +
-                '}';
+        return
+                super.getName() + "\n" +
+                "Swimming Discipline: " + swimmingDiscipline + "\n" +
+                "Competing Id: " + competingId;
     }
-
-
-
 }
