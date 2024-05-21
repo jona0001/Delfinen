@@ -229,8 +229,9 @@ public class UserInterface {
     public void showTeams(){
         HashMap<MembershipType, Discipline> mapWithUserInput = sortDisciplineAndType();
         for ( Map.Entry<MembershipType, Discipline> entry : mapWithUserInput.entrySet()) {
-            List<CompetingMember> team = controller.sortMembers(entry.getKey(), entry.getValue());
-            printCompetingMembers(team);
+            Team team = controller.getTeams(entry.getKey(), entry.getValue());
+            System.out.println("Teams trainer is " + team.getTrainer().getName());
+            printCompetingMembers(team.getCompetingMembers());
         }
 
     }

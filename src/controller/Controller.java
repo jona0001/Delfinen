@@ -42,8 +42,8 @@ public class Controller {
         fileHandler.loadCompetitionResults();
     }
 
-    public List<CompetingMember> sortMembers(MembershipType membershipType, Discipline discipline) {
-        return delfin.getMembersByAgeAndDiscipline(membershipType, discipline);
+    public Team getTeams(MembershipType membershipType, Discipline discipline) {
+        return delfin.getTeams(membershipType, discipline);
     }
 
 
@@ -66,7 +66,7 @@ public class Controller {
 
 
     public void setCompetitionEvent(String competingMember, String venue, int ranking, double time) throws FileNotFoundException {
-        delfin.addCompetionEvent(competingMember, venue, ranking, time);
+        delfin.addCompetitionEvent(competingMember, venue, ranking, time);
     }
 
     public ArrayList<Competition> showCompetition() {

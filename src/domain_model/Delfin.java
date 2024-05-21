@@ -7,30 +7,45 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Delfin {
 
     private ArrayList<Member> members;
     private ArrayList<Result> results;
-    private ArrayList<Team> teams = new ArrayList<>();
+    private HashMap<String, Team> teams = new HashMap<>();
     private ArrayList<Competition> competitions;
 
-    Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
-    Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
-    Team juniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
-    Team juniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
 
-    Team seniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
-    Team seniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
-    Team seniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
-    Team seniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
 
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<CompetingMember> competingMembers;
 
     public Delfin(ArrayList<Member> members) {
         this.members = members;
+        createTeams();
+    }
+
+    public void createTeams(){
+        Team juniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
+        Team juniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
+        Team juniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
+        Team juniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
+
+        Team seniorCrawlTeam = new Team(new Trainer("Kristoffer Kristoffersen"), Discipline.CRAWL);
+        Team seniorBackCrawlTeam = new Team(new Trainer("Jonathan Nakskov"), Discipline.BACK_CRAWL);
+        Team seniorButterflyTeam = new Team(new Trainer("Luna Szipli"), Discipline.BUTTERFLY);
+        Team seniorBreastStrokeTeam = new Team(new Trainer("Viktoria Aaris"), Discipline.BREAST_STROKE);
+
+        teams.put("JuniorCrawlTeam", juniorCrawlTeam);
+        teams.put("JuniorBackCrawlTeam", juniorBackCrawlTeam);
+        teams.put("JuniorButterflyTeam", juniorButterflyTeam);
+        teams.put("JuniorBreastStrokeTeam", juniorBreastStrokeTeam);
+        teams.put("SeniorCrawlTeam", seniorCrawlTeam);
+        teams.put("SeniorBackCrawlTeam", seniorBackCrawlTeam);
+        teams.put("SeniorButterflyTeam", seniorButterflyTeam);
+        teams.put("SeniorBreastStrokeTeam", seniorBreastStrokeTeam);
     }
 
     public void pairMembersAndResults() {
@@ -106,6 +121,8 @@ public class Delfin {
 
     //TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
 
+
+
     public void addMemberToTeam(CompetingMember competingMember) {
         MembershipType membershipType = competingMember.getMembership().getMembershipType();
         Discipline swimmingDiscipline = competingMember.getSwimmingDiscipline();
@@ -114,31 +131,31 @@ public class Delfin {
             case ACTIVE_JUNIOR:
                 switch (swimmingDiscipline) {
                     case BACK_CRAWL ->
-                            juniorBackCrawlTeam.addCompetingMembers(competingMember);
+                            teams.get("JuniorBackCrawlTeam").addCompetingMembers(competingMember);
                     case CRAWL ->
-                            juniorCrawlTeam.addCompetingMembers(competingMember);
+                            teams.get("JuniorCrawlTeam").addCompetingMembers(competingMember);
                     case BUTTERFLY ->
-                            juniorButterflyTeam.addCompetingMembers(competingMember);
+                            teams.get("JuniorButterflyTeam").addCompetingMembers(competingMember);
                     case BREAST_STROKE ->
-                            juniorBreastStrokeTeam.addCompetingMembers(competingMember);
-                    default -> {
-                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
-                    }
+                            teams.get("JuniorBreastStrokeTeam").addCompetingMembers(competingMember);
+//                    default -> {
+//                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+//                    }
                 }
-                break; // Add break statement
+
             case ACTIVE_SENIOR:
                 switch (swimmingDiscipline) {
                     case BACK_CRAWL ->
-                            seniorBackCrawlTeam.addCompetingMembers(competingMember);
+                            teams.get("SeniorBackCrawlTeam").addCompetingMembers(competingMember);
                     case BREAST_STROKE ->
-                            seniorBreastStrokeTeam.addCompetingMembers(competingMember);
+                            teams.get("SeniorBreastStrokeTeam").addCompetingMembers(competingMember);
                     case BUTTERFLY ->
-                            seniorButterflyTeam.addCompetingMembers(competingMember);
+                            teams.get("SeniorButterflyTeam").addCompetingMembers(competingMember);
                     case CRAWL ->
-                            seniorCrawlTeam.addCompetingMembers(competingMember);
-                    default -> {
-                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
-                    }
+                            teams.get("SeniorCrawlTeam").addCompetingMembers(competingMember);
+//                    default -> {
+//                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+//                    }
                 }
         }
     }
@@ -178,26 +195,57 @@ public class Delfin {
         return memberships;
     }
 
-    public List<CompetingMember> getMembersByAgeAndDiscipline(MembershipType membershipType, Discipline discipline ) {
-        List<CompetingMember> sortCompetingMember = new ArrayList<>();
-        List<CompetingMember> sortCompetingMemberDiscipline = new ArrayList<>();
+    public Team getTeams(MembershipType membershipType, Discipline discipline ) {
 
-        for (CompetingMember member : competingMembers) {
-            if (member.getMembership().getMembershipType().equals(membershipType)) {
-                sortCompetingMember.add(member);
-            }
-        }
+        Team teamToReturn = null;
+//        List<CompetingMember> sortCompetingMember = new ArrayList<>();
+//        List<CompetingMember> sortCompetingMemberDiscipline = new ArrayList<>();
+//
+//        for (CompetingMember member : competingMembers) {
+//            if (member.getMembership().getMembershipType().equals(membershipType)) {
+//                sortCompetingMember.add(member);
+//            }
+//        }
+//
+//        for (CompetingMember member : sortCompetingMember) {
+//            if (member.getSwimmingDiscipline().equals(discipline)) {
+//                sortCompetingMemberDiscipline.add(member);
+//            }
+//        }
+//        return sortCompetingMemberDiscipline;
 
-        for (CompetingMember member : sortCompetingMember) {
-            if (member.getSwimmingDiscipline().equals(discipline)) {
-                sortCompetingMemberDiscipline.add(member);
-            }
+        switch (membershipType) {
+            case ACTIVE_JUNIOR:
+                switch (discipline) {
+                    case BACK_CRAWL ->
+                            teamToReturn = teams.get("JuniorBackCrawlTeam");
+                    case CRAWL ->
+                            teamToReturn = teams.get("JuniorCrawlTeam");
+                    case BUTTERFLY ->
+                            teamToReturn = teams.get("JuniorButterflyTeam");
+                    case BREAST_STROKE ->
+                            teamToReturn = teams.get("JuniorBreastStrokeTeam");
+                    //default -> System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+                }
+                break; // Add break statement
+            case ACTIVE_SENIOR:
+                switch (discipline) {
+                    case BACK_CRAWL ->
+                            teamToReturn = teams.get("SeniorBackCrawlTeam");
+                    case BREAST_STROKE ->
+                            teamToReturn = teams.get("SeniorBreastStrokeTeam");
+                    case BUTTERFLY ->
+                            teamToReturn = teams.get("SeniorButterflyTeam");
+                    case CRAWL ->
+                            teamToReturn = teams.get("SeniorCrawlTeam");
+                    //default -> System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
+                }
         }
-        return sortCompetingMemberDiscipline;
+        return teamToReturn;
     }
 
     public List<CompetingMember> getTopSwimmers(MembershipType membershipType, Discipline discipline){
-        List<CompetingMember> membersByAgeAndDiscipline = getMembersByAgeAndDiscipline(membershipType, discipline);
+        List<CompetingMember> membersByAgeAndDiscipline = getTeams(membershipType, discipline).getCompetingMembers();
         List<CompetingMember> topSwimmers = new ArrayList<>();
         List<CompetingMember> topFiveSwimmers = new ArrayList<>();
         for(CompetingMember swimmer : membersByAgeAndDiscipline){
@@ -234,10 +282,10 @@ public class Delfin {
         return null;
     }
 
-    public void addCompetionEvent(String competingMember, String venue, int ranking, double time) throws FileNotFoundException {
+    public void addCompetitionEvent(String competingMember, String venue, int ranking, double time) throws FileNotFoundException {
         CompetingMember competingMember1 = competingMembers.get(Integer.parseInt(competingMember));
         Competition competitionToSave = new Competition(competingMember1, venue,ranking,time);
-         fileHandler.saveCompetingResult(competitionToSave);
+        fileHandler.saveCompetingResult(competitionToSave);
     }
 
     public ArrayList<Competition> getCompetitions() {
