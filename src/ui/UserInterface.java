@@ -240,10 +240,8 @@ public class UserInterface {
         String competingMember = scanner.next();
 
         System.out.println("Enter event name for the competition");
-        String eventInput = scanner.next();
-
-        System.out.println("Enter location for the competition");
-        String locationInput = scanner.next();
+        scanner.nextLine();
+        String eventInput = scanner.nextLine();
 
         System.out.println("Enter ranking of the competition");
         int rankInput = scanner.nextInt();
@@ -251,7 +249,7 @@ public class UserInterface {
         System.out.println("Enter swimming time for member");
         double timeInput = scanner.nextDouble();
 
-        controller.setCompetitionEvent(competingMember,eventInput, rankInput, timeInput);
+        controller.setCompetitionEvent(competingMember, eventInput, rankInput, timeInput);
 
 
     }
