@@ -1,9 +1,6 @@
 package domain_model;
 
 
-import java.time.LocalDateTime;
-import java.time.format.FormatStyle;
-
 public class Member {
     private int age;
     private String name;
@@ -18,16 +15,8 @@ public class Member {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Membership getMembership() {

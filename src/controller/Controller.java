@@ -21,7 +21,7 @@ public class Controller {
         delfin.pairMembersAndCompetitionResults();
     }
 
-    public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
+    public boolean addMember(String name, int age, String membership, int discipline) throws FileNotFoundException {
         return delfin.addMember(name, age, membership, discipline);
     }
     public ArrayList<Member> getAllMembers() {

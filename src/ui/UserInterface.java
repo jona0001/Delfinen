@@ -2,7 +2,6 @@ package ui;
 
 import controller.Controller;
 import domain_model.*;
-
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -130,34 +129,34 @@ public class UserInterface {
                 scanner.nextLine();
             }
         }
-        String competing = scanner.nextLine();
-        boolean isCompeting = false;
-        if (competing.equalsIgnoreCase("yes")) {
-            isCompeting = true;
+
+        String membershipType = null;
+
+        while(true){
+            System.out.println("Enter desired membership type:");
+            System.out.println("1. Active(competing swimmers)");
+            System.out.println("2. Passive(amateur)");
+            int membershipInput = scanner.nextInt();
+            if(membershipInput == 1 || membershipInput == 2){
+                switch (membershipInput) {
+                    case 1 -> membershipType = "Active";
+                    case 2 -> membershipType = "Passive";
+                }
+                break;
+            }else{
+                System.out.println("Wrong input, try again");
+            }
         }
-
-        // We could add this function in the step where we ask about member age and do a if<18, set to Junior etc..
-        System.out.println("Enter desired membership type ");
-        String membershipType = scanner.next();
-
-
-        Discipline discipline = null;
+        int disciplineInput = 0;
         if (membershipType.equalsIgnoreCase("Active")) {
             System.out.println("Enter Discipline, choose one:");
             System.out.println("1. Butterfly");
             System.out.println("2. Crawl");
             System.out.println("3. Breast stroke");
             System.out.println("4. Back Crawl");
-            int disciplineInput = scanner.nextInt();
-
-            switch (disciplineInput) {
-                case 1 -> discipline = Discipline.BUTTERFLY;
-                case 2 -> discipline = Discipline.CRAWL;
-                case 3 -> discipline = Discipline.BREAST_STROKE;
-                case 4 -> discipline = Discipline.BACK_CRAWL;
-            }
+            disciplineInput = scanner.nextInt();
         }
-        boolean isAdded = controller.addMember(name, age, membershipType, discipline);
+        boolean isAdded = controller.addMember(name, age, membershipType, disciplineInput);
         if (isAdded) {
             System.out.println("The new member was added.");
         }

@@ -1,7 +1,5 @@
 package domain_model;
 
-import java.util.ArrayList;
-
 public class Competition {
     private CompetingMember competingMember;
     private String venue;
@@ -15,7 +13,6 @@ public class Competition {
         this.ranking = ranking;
         this.time = time;
     }
-
 
     public String toCSV() {
         StringBuilder csvBuilder = new StringBuilder();
@@ -37,15 +34,4 @@ public class Competition {
                 "Time: " + time + "\n";
     }
 
-    public String getVenue() {
-        return venue;
-    }
-
-    public int getRanking() {
-        return ranking;
-    }
-
-    public double getTime() {
-        return time;
-    }
 }

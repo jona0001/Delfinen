@@ -16,9 +16,6 @@ public class Delfin {
     private ArrayList<Result> results;
     private HashMap<String, Team> teams = new HashMap<>();
     private ArrayList<Competition> competitions;
-
-
-
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<CompetingMember> competingMembers;
 
@@ -82,17 +79,14 @@ public class Delfin {
         return competingMembers;
     }
 
-    //TODO:refactor this so our method arent so big and our program rely so much about on a single method/function.
-    public boolean addMember(String name, int age, String membership, Discipline discipline) throws FileNotFoundException {
-        Membership newMembership = new Membership(LocalDate.now());
-        if(membership.equals("active") && age > 18){
-            newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
-        } else if(membership.equals("passive") && age > 18){
-            newMembership.setMembershipType(MembershipType.PASSIVE_SENIOR);
-        } else if(membership.equals("active") && age < 18){
-            newMembership.setMembershipType(MembershipType.ACTIVE_JUNIOR);
-        } else {
-            newMembership.setMembershipType(MembershipType.PASSIVE_JUNIOR);
+    public boolean addMember(String name, int age, String membership, int disciplineInput) throws FileNotFoundException {
+        Membership newMembership = createNewMembership(membership, age);
+        Discipline discipline = null;
+        switch (disciplineInput) {
+            case 1 -> discipline = Discipline.BUTTERFLY;
+            case 2 -> discipline = Discipline.CRAWL;
+            case 3 -> discipline = Discipline.BREAST_STROKE;
+            case 4 -> discipline = Discipline.BACK_CRAWL;
         }
         Member newMember;
         if(membership.equalsIgnoreCase("active")){
@@ -102,6 +96,20 @@ public class Delfin {
         }
         // Call the addMemberToSystem method to handle the addition
         return addMemberToSystem(newMember, newMembership);
+    }
+
+    public Membership createNewMembership(String membership, int age){
+        Membership newMembership = new Membership(LocalDate.now());
+        if(membership.equalsIgnoreCase("active") && age > 18){
+            newMembership.setMembershipType(MembershipType.ACTIVE_SENIOR);
+        } else if(membership.equalsIgnoreCase("passive") && age > 18){
+            newMembership.setMembershipType(MembershipType.PASSIVE_SENIOR);
+        } else if(membership.equalsIgnoreCase("active") && age < 18){
+            newMembership.setMembershipType(MembershipType.ACTIVE_JUNIOR);
+        } else {
+            newMembership.setMembershipType(MembershipType.PASSIVE_JUNIOR);
+        }
+        return newMembership;
     }
 
     private boolean addMemberToSystem(Member newMember, Membership newMembership) throws FileNotFoundException {
@@ -118,11 +126,6 @@ public class Delfin {
         return isAdded;
     }
 
-
-    //TODO need to refactor this giant pile of if statements, we can use HashMaps or something else.
-
-
-
     public void addMemberToTeam(CompetingMember competingMember) {
         MembershipType membershipType = competingMember.getMembership().getMembershipType();
         Discipline swimmingDiscipline = competingMember.getSwimmingDiscipline();
@@ -138,9 +141,6 @@ public class Delfin {
                             teams.get("JuniorButterflyTeam").addCompetingMembers(competingMember);
                     case BREAST_STROKE ->
                             teams.get("JuniorBreastStrokeTeam").addCompetingMembers(competingMember);
-//                    default -> {
-//                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
-//                    }
                 }
 
             case ACTIVE_SENIOR:
@@ -153,13 +153,9 @@ public class Delfin {
                             teams.get("SeniorButterflyTeam").addCompetingMembers(competingMember);
                     case CRAWL ->
                             teams.get("SeniorCrawlTeam").addCompetingMembers(competingMember);
-//                    default -> {
-//                        System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
-//                    }
                 }
         }
     }
-
 
     public ArrayList<Member> getAllMembers(){
         return members;
@@ -198,22 +194,6 @@ public class Delfin {
     public Team getTeams(MembershipType membershipType, Discipline discipline ) {
 
         Team teamToReturn = null;
-//        List<CompetingMember> sortCompetingMember = new ArrayList<>();
-//        List<CompetingMember> sortCompetingMemberDiscipline = new ArrayList<>();
-//
-//        for (CompetingMember member : competingMembers) {
-//            if (member.getMembership().getMembershipType().equals(membershipType)) {
-//                sortCompetingMember.add(member);
-//            }
-//        }
-//
-//        for (CompetingMember member : sortCompetingMember) {
-//            if (member.getSwimmingDiscipline().equals(discipline)) {
-//                sortCompetingMemberDiscipline.add(member);
-//            }
-//        }
-//        return sortCompetingMemberDiscipline;
-
         switch (membershipType) {
             case ACTIVE_JUNIOR:
                 switch (discipline) {
@@ -225,9 +205,7 @@ public class Delfin {
                             teamToReturn = teams.get("JuniorButterflyTeam");
                     case BREAST_STROKE ->
                             teamToReturn = teams.get("JuniorBreastStrokeTeam");
-                    //default -> System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
                 }
-                break; // Add break statement
             case ACTIVE_SENIOR:
                 switch (discipline) {
                     case BACK_CRAWL ->
@@ -238,7 +216,6 @@ public class Delfin {
                             teamToReturn = teams.get("SeniorButterflyTeam");
                     case CRAWL ->
                             teamToReturn = teams.get("SeniorCrawlTeam");
-                    //default -> System.out.println("Invalid membership type or swimming discipline: " + membershipType + ", " + swimmingDiscipline);
                 }
         }
         return teamToReturn;
