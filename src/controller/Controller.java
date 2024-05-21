@@ -19,6 +19,7 @@ public class Controller {
         delfin.setCompetitions(fileHandler.loadCompetitionResults());
         delfin.pairMembersAndResults();
         delfin.pairMembersAndCompetitionResults();
+        delfin.loadTeams();
     }
 
     public boolean addMember(String name, int age, String membership, int discipline) throws FileNotFoundException {

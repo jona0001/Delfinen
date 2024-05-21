@@ -65,7 +65,11 @@ public class Delfin {
         }
     }
 
-
+    public void loadTeams(){
+        for(CompetingMember competingMember : competingMembers){
+            addMemberToTeam(competingMember);
+        }
+    }
     public void setCompetingMembers(ArrayList<CompetingMember> competingMembers) {
         this.competingMembers = competingMembers;
     }
@@ -129,7 +133,6 @@ public class Delfin {
     public void addMemberToTeam(CompetingMember competingMember) {
         MembershipType membershipType = competingMember.getMembership().getMembershipType();
         Discipline swimmingDiscipline = competingMember.getSwimmingDiscipline();
-
         switch (membershipType) {
             case ACTIVE_JUNIOR:
                 switch (swimmingDiscipline) {
@@ -142,7 +145,7 @@ public class Delfin {
                     case BREAST_STROKE ->
                             teams.get("JuniorBreastStrokeTeam").addCompetingMembers(competingMember);
                 }
-
+                break;
             case ACTIVE_SENIOR:
                 switch (swimmingDiscipline) {
                     case BACK_CRAWL ->
@@ -206,6 +209,7 @@ public class Delfin {
                     case BREAST_STROKE ->
                             teamToReturn = teams.get("JuniorBreastStrokeTeam");
                 }
+                break;
             case ACTIVE_SENIOR:
                 switch (discipline) {
                     case BACK_CRAWL ->
